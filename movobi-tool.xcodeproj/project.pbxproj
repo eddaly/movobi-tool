@@ -1,0 +1,328 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6463DD1217170036005E224B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6463DD1117170036005E224B /* Cocoa.framework */; };
+		6463DD1C17170036005E224B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6463DD1A17170036005E224B /* InfoPlist.strings */; };
+		6463DD1E17170036005E224B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6463DD1D17170036005E224B /* main.m */; };
+		6463DD2217170036005E224B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6463DD2017170036005E224B /* Credits.rtf */; };
+		6463DD2517170036005E224B /* MovobiAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6463DD2417170036005E224B /* MovobiAppDelegate.m */; };
+		6463DD2817170036005E224B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6463DD2617170036005E224B /* MainMenu.xib */; };
+		6463DD2B17170036005E224B /* movobi_tool.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6463DD2917170036005E224B /* movobi_tool.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6463DD0E17170036005E224B /* movobi-tool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "movobi-tool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6463DD1117170036005E224B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		6463DD1417170036005E224B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		6463DD1517170036005E224B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6463DD1617170036005E224B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6463DD1917170036005E224B /* movobi-tool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "movobi-tool-Info.plist"; sourceTree = "<group>"; };
+		6463DD1B17170036005E224B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6463DD1D17170036005E224B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6463DD1F17170036005E224B /* movobi-tool-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "movobi-tool-Prefix.pch"; sourceTree = "<group>"; };
+		6463DD2117170036005E224B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		6463DD2317170036005E224B /* MovobiAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovobiAppDelegate.h; sourceTree = "<group>"; };
+		6463DD2417170036005E224B /* MovobiAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovobiAppDelegate.m; sourceTree = "<group>"; };
+		6463DD2717170036005E224B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		6463DD2A17170036005E224B /* movobi_tool.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = movobi_tool.xcdatamodel; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6463DD0B17170036005E224B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6463DD1217170036005E224B /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6463DD0517170035005E224B = {
+			isa = PBXGroup;
+			children = (
+				6463DD1717170036005E224B /* movobi-tool */,
+				6463DD1017170036005E224B /* Frameworks */,
+				6463DD0F17170036005E224B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6463DD0F17170036005E224B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6463DD0E17170036005E224B /* movobi-tool.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6463DD1017170036005E224B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6463DD1117170036005E224B /* Cocoa.framework */,
+				6463DD1317170036005E224B /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6463DD1317170036005E224B /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6463DD1417170036005E224B /* AppKit.framework */,
+				6463DD1517170036005E224B /* CoreData.framework */,
+				6463DD1617170036005E224B /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		6463DD1717170036005E224B /* movobi-tool */ = {
+			isa = PBXGroup;
+			children = (
+				6463DD2317170036005E224B /* MovobiAppDelegate.h */,
+				6463DD2417170036005E224B /* MovobiAppDelegate.m */,
+				6463DD2617170036005E224B /* MainMenu.xib */,
+				6463DD2917170036005E224B /* movobi_tool.xcdatamodeld */,
+				6463DD1817170036005E224B /* Supporting Files */,
+			);
+			path = "movobi-tool";
+			sourceTree = "<group>";
+		};
+		6463DD1817170036005E224B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6463DD1917170036005E224B /* movobi-tool-Info.plist */,
+				6463DD1A17170036005E224B /* InfoPlist.strings */,
+				6463DD1D17170036005E224B /* main.m */,
+				6463DD1F17170036005E224B /* movobi-tool-Prefix.pch */,
+				6463DD2017170036005E224B /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6463DD0D17170036005E224B /* movobi-tool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6463DD2E17170036005E224B /* Build configuration list for PBXNativeTarget "movobi-tool" */;
+			buildPhases = (
+				6463DD0A17170036005E224B /* Sources */,
+				6463DD0B17170036005E224B /* Frameworks */,
+				6463DD0C17170036005E224B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "movobi-tool";
+			productName = "movobi-tool";
+			productReference = 6463DD0E17170036005E224B /* movobi-tool.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6463DD0617170035005E224B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Movobi;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Movobi Ltd";
+			};
+			buildConfigurationList = 6463DD0917170035005E224B /* Build configuration list for PBXProject "movobi-tool" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6463DD0517170035005E224B;
+			productRefGroup = 6463DD0F17170036005E224B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6463DD0D17170036005E224B /* movobi-tool */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6463DD0C17170036005E224B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6463DD1C17170036005E224B /* InfoPlist.strings in Resources */,
+				6463DD2217170036005E224B /* Credits.rtf in Resources */,
+				6463DD2817170036005E224B /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6463DD0A17170036005E224B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6463DD1E17170036005E224B /* main.m in Sources */,
+				6463DD2517170036005E224B /* MovobiAppDelegate.m in Sources */,
+				6463DD2B17170036005E224B /* movobi_tool.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6463DD1A17170036005E224B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6463DD1B17170036005E224B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6463DD2017170036005E224B /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6463DD2117170036005E224B /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		6463DD2617170036005E224B /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6463DD2717170036005E224B /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6463DD2C17170036005E224B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6463DD2D17170036005E224B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		6463DD2F17170036005E224B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "movobi-tool/movobi-tool-Prefix.pch";
+				INFOPLIST_FILE = "movobi-tool/movobi-tool-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6463DD3017170036005E224B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "movobi-tool/movobi-tool-Prefix.pch";
+				INFOPLIST_FILE = "movobi-tool/movobi-tool-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6463DD0917170035005E224B /* Build configuration list for PBXProject "movobi-tool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6463DD2C17170036005E224B /* Debug */,
+				6463DD2D17170036005E224B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6463DD2E17170036005E224B /* Build configuration list for PBXNativeTarget "movobi-tool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6463DD2F17170036005E224B /* Debug */,
+				6463DD3017170036005E224B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6463DD2917170036005E224B /* movobi_tool.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6463DD2A17170036005E224B /* movobi_tool.xcdatamodel */,
+			);
+			currentVersion = 6463DD2A17170036005E224B /* movobi_tool.xcdatamodel */;
+			path = movobi_tool.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6463DD0617170035005E224B /* Project object */;
+}
