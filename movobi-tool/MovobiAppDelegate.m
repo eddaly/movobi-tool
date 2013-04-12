@@ -7,6 +7,11 @@
 //
 
 #import "MovobiAppDelegate.h"
+#include "MovobiMasterViewController.h"
+
+@interface  MovobiAppDelegate()
+@property (nonatomic,strong) IBOutlet MovobiMasterViewController *masterViewController;
+@end
 
 @implementation MovobiAppDelegate
 
@@ -17,6 +22,15 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
+    
+    // 1. Create the master View Controller
+    self.masterViewController = [[MovobiMasterViewController alloc] initWithNibName:@"MovobiMasterViewController" bundle:nil];
+    
+    self.masterViewController.managedObjectContext = self.managedObjectContext;
+    
+    // 2. Add the view controller to the Window's content view
+    [self.window.contentView addSubview:self.masterViewController.view];
+    self.masterViewController.view.frame = ((NSView*)self.window.contentView).bounds;
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "movobi.movobi_tool" in the user's Application Support directory.
@@ -34,7 +48,7 @@
         return _managedObjectModel;
     }
 	
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"movobi_tool" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Movobi" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -81,9 +95,9 @@
         }
     }
     
-    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"movobi_tool.storedata"];
+    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"movobi.sqlite"];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
+    if (![coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]) {
         [[NSApplication sharedApplication] presentError:error];
         return nil;
     }

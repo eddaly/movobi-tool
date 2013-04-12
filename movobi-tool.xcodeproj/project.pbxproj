@@ -13,7 +13,15 @@
 		6463DD2217170036005E224B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6463DD2017170036005E224B /* Credits.rtf */; };
 		6463DD2517170036005E224B /* MovobiAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6463DD2417170036005E224B /* MovobiAppDelegate.m */; };
 		6463DD2817170036005E224B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6463DD2617170036005E224B /* MainMenu.xib */; };
-		6463DD2B17170036005E224B /* movobi_tool.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6463DD2917170036005E224B /* movobi_tool.xcdatamodeld */; };
+		6463DD3A1717009D005E224B /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 6463DD341717009D005E224B /* Screen.m */; };
+		6463DD3B1717009D005E224B /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 6463DD381717009D005E224B /* Movie.m */; };
+		6463DD3C1717009D005E224B /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 6463DD391717009D005E224B /* Tag.m */; };
+		6463DD42171705C3005E224B /* Movobi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6463DD40171705C3005E224B /* Movobi.xcdatamodeld */; };
+		6463DD4817170BB6005E224B /* MovobiImageTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6463DD4717170BB6005E224B /* MovobiImageTransformer.m */; };
+		6463DD4F171726BA005E224B /* MovobiMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6463DD4D171726BA005E224B /* MovobiMasterViewController.m */; };
+		6463DD50171726BA005E224B /* MovobiMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6463DD4E171726BA005E224B /* MovobiMasterViewController.xib */; };
+		6463DD8417186AA6005E224B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6463DD8317186AA6005E224B /* QuartzCore.framework */; };
+		6463DD871718925C005E224B /* cr.png in Resources */ = {isa = PBXBuildFile; fileRef = 6463DD851718925C005E224B /* cr.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +38,20 @@
 		6463DD2317170036005E224B /* MovobiAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovobiAppDelegate.h; sourceTree = "<group>"; };
 		6463DD2417170036005E224B /* MovobiAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovobiAppDelegate.m; sourceTree = "<group>"; };
 		6463DD2717170036005E224B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		6463DD2A17170036005E224B /* movobi_tool.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = movobi_tool.xcdatamodel; sourceTree = "<group>"; };
+		6463DD341717009D005E224B /* Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Screen.m; path = ../../movobi/movobi/Screen.m; sourceTree = "<group>"; };
+		6463DD351717009D005E224B /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tag.h; path = ../../movobi/movobi/Tag.h; sourceTree = "<group>"; };
+		6463DD361717009D005E224B /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Screen.h; path = ../../movobi/movobi/Screen.h; sourceTree = "<group>"; };
+		6463DD371717009D005E224B /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Movie.h; path = ../../movobi/movobi/Movie.h; sourceTree = "<group>"; };
+		6463DD381717009D005E224B /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Movie.m; path = ../../movobi/movobi/Movie.m; sourceTree = "<group>"; };
+		6463DD391717009D005E224B /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tag.m; path = ../../movobi/movobi/Tag.m; sourceTree = "<group>"; };
+		6463DD41171705C3005E224B /* movobi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = movobi.xcdatamodel; sourceTree = "<group>"; };
+		6463DD4617170BB6005E224B /* MovobiImageTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovobiImageTransformer.h; sourceTree = "<group>"; };
+		6463DD4717170BB6005E224B /* MovobiImageTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovobiImageTransformer.m; sourceTree = "<group>"; };
+		6463DD4C171726BA005E224B /* MovobiMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovobiMasterViewController.h; sourceTree = "<group>"; };
+		6463DD4D171726BA005E224B /* MovobiMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovobiMasterViewController.m; sourceTree = "<group>"; };
+		6463DD4E171726BA005E224B /* MovobiMasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovobiMasterViewController.xib; sourceTree = "<group>"; };
+		6463DD8317186AA6005E224B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6463DD861718925C005E224B /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/cr.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6463DD8417186AA6005E224B /* QuartzCore.framework in Frameworks */,
 				6463DD1217170036005E224B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,6 +70,7 @@
 		6463DD0517170035005E224B = {
 			isa = PBXGroup;
 			children = (
+				6463DD8317186AA6005E224B /* QuartzCore.framework */,
 				6463DD1717170036005E224B /* movobi-tool */,
 				6463DD1017170036005E224B /* Frameworks */,
 				6463DD0F17170036005E224B /* Products */,
@@ -84,10 +107,21 @@
 		6463DD1717170036005E224B /* movobi-tool */ = {
 			isa = PBXGroup;
 			children = (
+				6463DD4617170BB6005E224B /* MovobiImageTransformer.h */,
+				6463DD4717170BB6005E224B /* MovobiImageTransformer.m */,
+				6463DD341717009D005E224B /* Screen.m */,
+				6463DD351717009D005E224B /* Tag.h */,
+				6463DD361717009D005E224B /* Screen.h */,
+				6463DD371717009D005E224B /* Movie.h */,
+				6463DD381717009D005E224B /* Movie.m */,
+				6463DD40171705C3005E224B /* Movobi.xcdatamodeld */,
+				6463DD391717009D005E224B /* Tag.m */,
 				6463DD2317170036005E224B /* MovobiAppDelegate.h */,
 				6463DD2417170036005E224B /* MovobiAppDelegate.m */,
 				6463DD2617170036005E224B /* MainMenu.xib */,
-				6463DD2917170036005E224B /* movobi_tool.xcdatamodeld */,
+				6463DD4C171726BA005E224B /* MovobiMasterViewController.h */,
+				6463DD4D171726BA005E224B /* MovobiMasterViewController.m */,
+				6463DD4E171726BA005E224B /* MovobiMasterViewController.xib */,
 				6463DD1817170036005E224B /* Supporting Files */,
 			);
 			path = "movobi-tool";
@@ -96,6 +130,7 @@
 		6463DD1817170036005E224B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6463DD851718925C005E224B /* cr.png */,
 				6463DD1917170036005E224B /* movobi-tool-Info.plist */,
 				6463DD1A17170036005E224B /* InfoPlist.strings */,
 				6463DD1D17170036005E224B /* main.m */,
@@ -160,6 +195,8 @@
 				6463DD1C17170036005E224B /* InfoPlist.strings in Resources */,
 				6463DD2217170036005E224B /* Credits.rtf in Resources */,
 				6463DD2817170036005E224B /* MainMenu.xib in Resources */,
+				6463DD50171726BA005E224B /* MovobiMasterViewController.xib in Resources */,
+				6463DD871718925C005E224B /* cr.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +209,12 @@
 			files = (
 				6463DD1E17170036005E224B /* main.m in Sources */,
 				6463DD2517170036005E224B /* MovobiAppDelegate.m in Sources */,
-				6463DD2B17170036005E224B /* movobi_tool.xcdatamodeld in Sources */,
+				6463DD3A1717009D005E224B /* Screen.m in Sources */,
+				6463DD3B1717009D005E224B /* Movie.m in Sources */,
+				6463DD3C1717009D005E224B /* Tag.m in Sources */,
+				6463DD42171705C3005E224B /* Movobi.xcdatamodeld in Sources */,
+				6463DD4817170BB6005E224B /* MovobiImageTransformer.m in Sources */,
+				6463DD4F171726BA005E224B /* MovobiMasterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +243,14 @@
 				6463DD2717170036005E224B /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		6463DD851718925C005E224B /* cr.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6463DD861718925C005E224B /* en */,
+			);
+			name = cr.png;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -312,13 +362,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		6463DD2917170036005E224B /* movobi_tool.xcdatamodeld */ = {
+		6463DD40171705C3005E224B /* Movobi.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				6463DD2A17170036005E224B /* movobi_tool.xcdatamodel */,
+				6463DD41171705C3005E224B /* movobi.xcdatamodel */,
 			);
-			currentVersion = 6463DD2A17170036005E224B /* movobi_tool.xcdatamodel */;
-			path = movobi_tool.xcdatamodeld;
+			currentVersion = 6463DD41171705C3005E224B /* movobi.xcdatamodel */;
+			path = Movobi.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
