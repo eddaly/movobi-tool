@@ -11,9 +11,9 @@
 @interface MovobiMasterViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) NSMutableArray *movies;
-@property (nonatomic, strong) NSMutableArray *screens;
 @property (weak) IBOutlet NSTableView *moviesTableView;
 @property (weak) IBOutlet NSTableView *screensTableView;
+@property (strong) IBOutlet NSArrayController *movieArrayController;
+@property (weak) IBOutlet NSImageView *screenImageView;
 
 @end
