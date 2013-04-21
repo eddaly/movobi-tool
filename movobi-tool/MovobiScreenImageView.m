@@ -13,12 +13,16 @@
 
 @synthesize tagRects;
 @synthesize selectedTagIndex;
-
+@synthesize draggingSelectedTag;
+@synthesize origSelectedTagRect;
+@synthesize action;
+@synthesize target;
 
 - (void)awakeFromNib
 {
     // Initialization code here.
     selectedTagIndex = [NSNumber numberWithInt:-1]; //i.e. take to mean no selected tag
+    draggingSelectedTag = FALSE;
 }
 
 - (void)drawTagArea:(CGRect) rect  withHighlight: (BOOL) highlighted
@@ -62,6 +66,61 @@
         [self drawTagArea: selectedRect withHighlight: YES];
 
     [theContext restoreGraphicsState];
+}
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    if ([self.selectedTagIndex intValue] == -1)
+        return; // Could allow select for first click
+    
+    origSelectedTagRect = [[tagRects objectAtIndex: [selectedTagIndex integerValue]] rectValue];
+    draggingSelectedTag = NSPointInRect([self convertPoint:[theEvent locationInWindow] fromView:nil], origSelectedTagRect);
+}
+
+-(void)mouseDragged:(NSEvent *)theEvent
+{
+    CGRect selectedTagRect = [[tagRects objectAtIndex: [selectedTagIndex integerValue]] rectValue];
+    
+    if (draggingSelectedTag)
+    {
+        selectedTagRect.origin.x += [theEvent deltaX];
+        selectedTagRect.origin.y -= [theEvent deltaY];
+    }
+    else
+    {
+        selectedTagRect.size.width += [theEvent deltaX];
+        selectedTagRect.size.height -= [theEvent deltaY];
+    
+    }
+    [self setNeedsDisplay];
+    NSValue *tagRectObj = [NSValue valueWithRect: selectedTagRect];
+    [tagRects replaceObjectAtIndex: [selectedTagIndex integerValue] withObject: tagRectObj];
+}
+
+- (void)mouseUp:(NSEvent *)theEvent
+{
+    draggingSelectedTag = FALSE;
+    
+    // CODE TO RESET BUT NEEDS TO BE CALLED SOME OTHER TIME OR NOT AT ALL
+    /*{
+        NSValue *tagRectObj = [NSValue valueWithRect: origSelectedTagRect];
+        [tagRects replaceObjectAtIndex: [selectedTagIndex integerValue] withObject: tagRectObj];
+        [self setNeedsDisplay];
+    }*/
+    // Send to controller to handle
+    [NSApp sendAction:[self action] to:[self target] from:self];
+}
+
+- (SEL)action {return action; }
+
+- (void)setAction:(SEL)newAction {
+    action = newAction;
+}
+
+- (id)target { return target; }
+
+- (void)setTarget:(id)newTarget {
+    target = newTarget;
 }
 
 @end

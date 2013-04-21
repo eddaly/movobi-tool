@@ -66,19 +66,15 @@
     [self.screensTableView setDelegate: self];
     [self.screensTableView setDataSource: self];
     [self.tagsTableView setDelegate: self];
-    
     [self.screensTableView setTarget:self];
     [self.screensTableView setDoubleAction: @selector(doubleClick:)];
-    
+    [self.screenImageView setAction: @selector(mouseUp:)];
+    [self.screenImageView setTarget: self];
+
     // Sort array controllers (and therefore table) in line with the movies array
     NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     [self.movieArrayController setSortDescriptors: [NSArray arrayWithObject:nameDescriptor]];
     [self.movieArrayController rearrangeObjects];
-    
-    // And the tags
-    NSSortDescriptor *nameDescriptor2 = [NSSortDescriptor sortDescriptorWithKey:@"timeStart" ascending:YES];
-    [self.tagsArrayController setSortDescriptors: [NSArray arrayWithObject:nameDescriptor2]];
-    [self.tagsArrayController rearrangeObjects];
 }
 
 // Assumes imageScaling NSScaleProportionally
@@ -109,19 +105,22 @@
 - (void)setupTagRects
 {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity: [tags count]];
-    for (Tag *tag in tags) //***are they in order in table?
+    
+    NSArray *tagsArray = [self.tagsArrayController arrangedObjects]; // Note, can't use self.tags as order changes on add/remove
+    for (Tag *tag in tagsArray)
     {
         if ([self screenImageView].image != nil)
         {
             // Scaled image
             CGRect r = [self frameForImage: [self screenImageView].image inImageViewAspectFit: [self screenImageView]];
-        
-            //*** Scaled tag (Y may be flipped from iOS coords)
             CGRect tagRect = CGRectMake (
                 r.origin.x + [tag.rectTopLeftX floatValue] * r.size.width,
                 r.origin.y + [tag.rectTopLeftY floatValue] * r.size.height,
                 [tag.rectWidth floatValue] * r.size.width,
                 [tag.rectHeight floatValue] * r.size.height);
+            // Flip Y for NSView
+            tagRect.origin.y = r.size.height - ((tagRect.origin.y - r.origin.y) + tagRect.size.height);
+            tagRect.origin.y += r.origin.y;
         
             NSValue *tagRectObj = [NSValue valueWithRect:tagRect];
             [array addObject: tagRectObj];
@@ -133,6 +132,7 @@
 
 - (Movie*) getSelectedMovie
 {
+    // Note not using [self.movieArrayController selection] and KVO accessors as not changing contents
     NSUInteger selIndex = self.movieArrayController.selectionIndex;
     if (selIndex == NSNotFound)
         return nil;
@@ -224,24 +224,28 @@
 
 -(void)setScreenImageView
 {
-    NSImage* image = nil;
-    if ([self.screensTableView selectedRow] != -1) // Needed if not selected a screen yet
+    Screen *screen = nil;
+    if ([self.screensTableView selectedRow] == -1) // Needed if not selected a screen yet
     {
-        // Force update of new selected screen (tried selecting it but doesn't call tableViewSelectionDidChange)
-        if ([[self getSelectedScreensSorted] count] > [self.screensTableView selectedRow])
-        {
-            Screen *screen = [[self getSelectedScreensSorted] objectAtIndex: [self.screensTableView selectedRow]];
-            image = screen.image;
+        if ([[self getSelectedScreensSorted] count] > 0) { // Then select the first (if there is one)
+            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex: 0];
+            [self.screensTableView selectRowIndexes:indexSet byExtendingSelection: FALSE];
+            screen = [[self getSelectedScreensSorted] objectAtIndex: 0]; // Not needed as above will result in this called again with a selection
         }
     }
-    self.screenImageView.image = image;
+    else { // Select the selected screen
+        screen = [[self getSelectedScreensSorted] objectAtIndex: [self.screensTableView selectedRow]];
+    }
+    if (screen != nil)
+        self.screenImageView.image = screen.image;
+    else
+        self.screenImageView.image = nil;
     
-    // Here as this is when screen detailed view needs update
+    // And set-up the tags (note, this calls tableViewSelectionDidChange which calls setSelectedTagIndex)
     self.tags = [self getSelectedMovie].tags;//***note all in the movie in this dumb model
-    
-    // Set up and selects default tag (can't unselect as selectiondidchange not called if reselect tag 0)
+        
+    // Set up
     [self setupTagRects];
-    [self.screenImageView setSelectedTagIndex: [NSNumber numberWithInt: 0]];
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
@@ -259,10 +263,10 @@
     {
         [self setScreenImageView];
     }
-    if (aTableView == self.tagsTableView)//***not being called for Tag table?
+    if (aTableView == self.tagsTableView)
     {
         [self.screenImageView setSelectedTagIndex: [NSNumber numberWithInteger: self.tagsArrayController.selectionIndex]];
-        [self.screenImageView setNeedsDisplay];//needed?
+        [self.screenImageView setNeedsDisplay];
     }
 }
 
@@ -314,8 +318,8 @@
         return;
     
     Screen *screen = [NSEntityDescription
-                       insertNewObjectForEntityForName:@"Screen"
-                       inManagedObjectContext:managedObjectContext];
+                      insertNewObjectForEntityForName:@"Screen"
+                      inManagedObjectContext:managedObjectContext];
     
     // Connect up to movie
     screen.movie = [self getSelectedMovie];
@@ -343,8 +347,8 @@
 
 - (IBAction)addMovie:(id)sender {
     Movie *movie = [NSEntityDescription
-                      insertNewObjectForEntityForName:@"Movie"
-                      inManagedObjectContext:managedObjectContext];
+                    insertNewObjectForEntityForName:@"Movie"
+                    inManagedObjectContext:managedObjectContext];
     
     // Add to the arraycontroller (that uses binding to synch with managedobjectcontext)
     [self.movieArrayController addObject: movie];
@@ -374,15 +378,20 @@
         return;
     
     Tag *tag = [NSEntityDescription
-                      insertNewObjectForEntityForName:@"Tag"
-                      inManagedObjectContext:managedObjectContext];
+                insertNewObjectForEntityForName:@"Tag"
+                inManagedObjectContext:managedObjectContext];
     
     // Connect up to movie (should be screen)
     Movie* movie = [self getSelectedMovie];
     tag.movie = movie;
+    tag.rectTopLeftX = [NSNumber numberWithFloat: 0.4f];
+    tag.rectTopLeftY = [NSNumber numberWithFloat: 0.4f];
+    tag.rectWidth = [NSNumber numberWithFloat: 0.2f];
+    tag.rectHeight = [NSNumber numberWithFloat: 0.2f];
     
-    // Add to the controller not [movie.tags addObject: tag] because...
+    // Add to the controller which will update the tags array via bindings and select (as select inserted objects is on)
     [self.tagsArrayController addObject: tag];
+    [self setupTagRects];
 }
 
 - (IBAction)removeTag:(id)sender {
@@ -392,12 +401,46 @@
     
     // Get tag out of ArrayController
     NSArray *tagsArray = [self.tagsArrayController arrangedObjects];
+    Tag *tag = [tagsArray objectAtIndex: self.tagsArrayController.selectionIndex];  //***should I be using [self.tagsArrayController selection]?
+    
+    // Remove from the arraycontroller (that uses binding to sync with self.tags array) and CoreData context (not automatic)
+    [self.tagsArrayController removeObject: tag]; //*** this (sometimes!?) calls tableViewSelectionDidChange which calls setSelectedTagIndex (probably because
+    [self.managedObjectContext deleteObject: tag];
+    
+    // Set up and selects default tag (can't unselect as selectiondidchange not called if reselect tag 0)
+    // Note can't just call setScreenImageView as will reset the tags list from the movie (not sure why this isn't updated anyway)
+    [self setupTagRects];
+    if ([self.tags count] == 0)
+        [self.screenImageView setSelectedTagIndex: [NSNumber numberWithInt: -1]];
+    [self.screenImageView setNeedsDisplay];
+}
+
+// Sent from the ScreenImageView to tell controller selected tag rect has changed
+- (void)mouseUp:(NSEvent *)theEvent
+{
+    if (self.tagsArrayController.selectionIndex == NSNotFound)
+        return;
+    
+    // Get tag out of ArrayController
+    NSArray *tagsArray = [self.tagsArrayController arrangedObjects];
     Tag *tag = [tagsArray objectAtIndex: self.tagsArrayController.selectionIndex];
     
-    // Remove from the arraycontroller (that uses binding to sync with managedobjectcontext)
-    // Note, check removes from tags list in movie/screen as well as db
-    [self.tagsArrayController removeObject: tag];
-    [self.managedObjectContext deleteObject: tag];
+    // Get the rect out of the view
+    NSInteger index = [self.screenImageView.selectedTagIndex integerValue];
+    CGRect tagRect = [[self.screenImageView.tagRects objectAtIndex: index] rectValue];
+    
+    // Update it in scale independent co-ords used in Tag model
+    CGRect r = [self frameForImage: [self screenImageView].image inImageViewAspectFit: [self screenImageView]];
+    
+    // Flip Y
+    tagRect.origin.y -= r.origin.y;
+    tagRect.origin.y = -(tagRect.origin.y - r.size.height) - tagRect.size.height;
+    tagRect.origin.y += r.origin.y;
+
+    tag.rectTopLeftX = [NSNumber numberWithFloat: (tagRect.origin.x - r.origin.x) / r.size.width];
+    tag.rectTopLeftY = [NSNumber numberWithFloat: (tagRect.origin.y - r.origin.y) / r.size.height];
+    tag.rectWidth = [NSNumber numberWithFloat: tagRect.size.width / r.size.width];
+    tag.rectHeight = [NSNumber numberWithFloat: tagRect.size.height / r.size.height];
 }
 
 @end

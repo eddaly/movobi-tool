@@ -19,4 +19,5 @@
 @property (weak) IBOutlet MovobiScreenImageView *screenImageView;
 @property (strong) IBOutlet NSArrayController *tagsArrayController;
 @property (weak) IBOutlet NSTableView *tagsTableView;
+
 @end

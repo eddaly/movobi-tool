@@ -10,7 +10,12 @@
 
 @interface MovobiScreenImageView : NSImageView
 
-@property (nonatomic, strong) NSArray *tagRects;
+@property (nonatomic, strong) NSMutableArray *tagRects;
 @property (nonatomic, strong) NSNumber *selectedTagIndex;
+@property BOOL draggingSelectedTag;
+@property CGRect origSelectedTagRect;
+@property SEL action;
+@property id target;
+
 
 @end
