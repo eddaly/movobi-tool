@@ -1,21 +1,21 @@
 //
-//  Screen.m
+//  Referral.m
 //  movobi-tool
 //
 //  Created by Ed Daly on 22/04/2013.
 //  Copyright (c) 2013 Movobi Ltd. All rights reserved.
 //
 
-#import "Screen.h"
-#import "Film.h"
+#import "Referral.h"
+#import "MObject.h"
 
 
-@implementation Screen
+@implementation Referral
 
+@dynamic name;
 @dynamic image;
-@dynamic timeStart;
-@dynamic timeEnd;
-@dynamic tags;
-@dynamic film;
+@dynamic url;
+@dynamic owner;
+@dynamic mobject;
 
 @end

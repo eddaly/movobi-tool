@@ -1,5 +1,5 @@
 //
-//  Screen.h
+//  MObject.h
 //  movobi-tool
 //
 //  Created by Ed Daly on 22/04/2013.
@@ -9,18 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Film;
 
-@interface Screen : NSManagedObject
+@interface MObject : NSManagedObject
 
-@property (nonatomic, retain) id image;
-@property (nonatomic, retain) NSNumber * timeStart;
-@property (nonatomic, retain) NSNumber * timeEnd;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSSet *referrals;
 @property (nonatomic, retain) NSSet *tags;
-@property (nonatomic, retain) Film *film;
 @end
 
-@interface Screen (CoreDataGeneratedAccessors)
+@interface MObject (CoreDataGeneratedAccessors)
+
+- (void)addReferralsObject:(NSManagedObject *)value;
+- (void)removeReferralsObject:(NSManagedObject *)value;
+- (void)addReferrals:(NSSet *)values;
+- (void)removeReferrals:(NSSet *)values;
 
 - (void)addTagsObject:(NSManagedObject *)value;
 - (void)removeTagsObject:(NSManagedObject *)value;

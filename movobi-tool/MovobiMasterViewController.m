@@ -7,9 +7,11 @@
 //
 
 #import "MovobiMasterViewController.h"
-#import "Movie.h"
+#import "Film.h"
 #import "Screen.h"
 #import "Tag.h"
+#import "MOProp.h"
+
 
 @interface MovobiMasterViewController ()
 
@@ -34,7 +36,7 @@
 // Log db (being called twice when set-up by app delegate)
 - (void)logdb
 {
-    NSManagedObjectContext *context = [self managedObjectContext];
+    /*NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription
@@ -52,7 +54,7 @@
         for (Tag *tag in alltags) {
             NSLog(@"Time: %@", tag.desc);
         }
-    }
+    }*/
 }
 
 - (void)loadView
@@ -61,8 +63,8 @@
     
     //[self logdb];
     
-    [self.moviesTableView setDelegate: self];
-    [self.moviesTableView setDataSource: self];
+    [self.filmsTableView setDelegate: self];
+    [self.filmsTableView setDataSource: self];
     [self.screensTableView setDelegate: self];
     [self.screensTableView setDataSource: self];
     [self.tagsTableView setDelegate: self];
@@ -71,10 +73,13 @@
     [self.screenImageView setAction: @selector(mouseUp:)];
     [self.screenImageView setTarget: self];
 
-    // Sort array controllers (and therefore table) in line with the movies array
+    // Sort array controllers (and therefore tables)
     NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    [self.movieArrayController setSortDescriptors: [NSArray arrayWithObject:nameDescriptor]];
-    [self.movieArrayController rearrangeObjects];
+    [self.filmArrayController setSortDescriptors: [NSArray arrayWithObject:nameDescriptor]];
+    [self.filmArrayController rearrangeObjects];
+    NSSortDescriptor *nameDescriptor2 = [NSSortDescriptor sortDescriptorWithKey:@"mobject.name" ascending:YES];
+    [self.tagsArrayController setSortDescriptors: [NSArray arrayWithObject:nameDescriptor2]];
+    [self.tagsArrayController rearrangeObjects];
 }
 
 // Assumes imageScaling NSScaleProportionally
@@ -130,27 +135,27 @@
     self.screenImageView.tagRects = array;//***is this memory not leaking?
 }
 
-- (Movie*) getSelectedMovie
+- (Film*) getSelectedFilm
 {
-    // Note not using [self.movieArrayController selection] and KVO accessors as not changing contents
-    NSUInteger selIndex = self.movieArrayController.selectionIndex;
+    // Note not using [self.filmArrayController selection] and KVO accessors as not changing contents
+    NSUInteger selIndex = self.filmArrayController.selectionIndex;
     if (selIndex == NSNotFound)
         return nil;
-    NSArray *moviesArray = [self.movieArrayController arrangedObjects];
-    Movie *movie = [moviesArray objectAtIndex: selIndex];
-    return movie;
+    NSArray *filmsArray = [self.filmArrayController arrangedObjects];
+    Film *film = [filmsArray objectAtIndex: selIndex];
+    return film;
 }
 
 - (NSMutableArray*) getSelectedScreensSorted
 {
-    Movie *movie = [self getSelectedMovie];
+    Film *film = [self getSelectedFilm];
 
     NSMutableArray *screens = nil;
-    if (movie.screens != nil)
+    if (film.screens != nil)
     {
         // Note could optimise to avoid unneeded sorting
-        NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
-        NSArray *screensArray = [movie.screens sortedArrayUsingDescriptors: [NSArray arrayWithObject:nameDescriptor]];
+        NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"timeStart" ascending:YES];
+        NSArray *screensArray = [film.screens sortedArrayUsingDescriptors: [NSArray arrayWithObject:nameDescriptor]];
         screens = [NSMutableArray arrayWithArray: screensArray];
     }
     return screens;
@@ -160,7 +165,7 @@
     
     NSInteger count=0;
     if (tableView == self.screensTableView) {
-        NSSet *screens = [self getSelectedMovie].screens;
+        NSSet *screens = [self getSelectedFilm].screens;
         if (screens != nil) {
             count=[screens count];
         }
@@ -176,15 +181,15 @@
     id returnValue = nil;
 
     if (aTableView == self.screensTableView) {
-        if ([self getSelectedMovie].screens != nil) {
+        if ([self getSelectedFilm].screens != nil) {
             NSString *columnIdentifer = [aTableColumn identifier];
     
             // Get the name at the specified row in the namesArray
             NSArray *screens = [self getSelectedScreensSorted];
             Screen *screen = [screens objectAtIndex:rowIndex];
     
-            if ([columnIdentifer isEqualToString:@"time"]) {
-                returnValue = screen.time;
+            if ([columnIdentifer isEqualToString:@"timeStart"]) {
+                returnValue = screen.timeStart;
             }
             else if ([columnIdentifer isEqualToString:@"image"]) {
                 returnValue = screen.image;
@@ -198,10 +203,10 @@
 {
     if (aTableView == self.screensTableView) {
         
-        if ([self getSelectedMovie].screens != nil) {
+        if ([self getSelectedFilm].screens != nil) {
             NSString *columnIdentifer = [aTableColumn identifier];
     
-            if ([columnIdentifer isEqualToString:@"time"]) {
+            if ([columnIdentifer isEqualToString:@"timeStart"]) {
                 NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
                 [f setNumberStyle:NSNumberFormatterDecimalStyle];
                 NSNumber * time = [f numberFromString: anObject];
@@ -210,15 +215,15 @@
                 NSInteger row = [self.screensTableView selectedRow];
                 NSArray *screens = [self getSelectedScreensSorted];
                 Screen *screen = [screens objectAtIndex: row];
-                screen.time = time;
+                screen.timeStart = time;
             }
             else if ([columnIdentifer isEqualToString:@"image"]) {
             }
         }
     }
-    else if (aTableView == self.moviesTableView) {
-        // Renamed a movie
-        [self.movieArrayController rearrangeObjects];   // Sort the ArrayController
+    else if (aTableView == self.filmsTableView) {
+        // Renamed a film
+        [self.filmArrayController rearrangeObjects];   // Sort the ArrayController
     }
 }
 
@@ -236,14 +241,17 @@
     else { // Select the selected screen
         screen = [[self getSelectedScreensSorted] objectAtIndex: [self.screensTableView selectedRow]];
     }
-    if (screen != nil)
+    if (screen != nil) {
         self.screenImageView.image = screen.image;
-    else
+
+        // And set-up the tags (note, this calls tableViewSelectionDidChange which calls setSelectedTagIndex)
+        self.tags = [screen mutableSetValueForKey:@"tags"]; //note was getting away with self.tags = screen.tags and not being KVO everywhere
+    }
+    else {
         self.screenImageView.image = nil;
+        self.tags = nil;
+    }
     
-    // And set-up the tags (note, this calls tableViewSelectionDidChange which calls setSelectedTagIndex)
-    self.tags = [self getSelectedMovie].tags;//***note all in the movie in this dumb model
-        
     // Set up
     [self setupTagRects];
 }
@@ -254,12 +262,12 @@
     NSInteger row = [aTableView selectedRow];
     if (row == -1)
         return;
-    if (aTableView == self.moviesTableView)
+    if (aTableView == self.filmsTableView)
     {
         [self.screensTableView reloadData];
     }
     // If change movie or screen, need to update screen image
-    if (aTableView == self.moviesTableView || aTableView == self.screensTableView)
+    if (aTableView == self.filmsTableView || aTableView == self.screensTableView)
     {
         [self setScreenImageView];
     }
@@ -314,7 +322,7 @@
 
 - (IBAction)addScreen:(id)sender {
     
-    if ([self.moviesTableView selectedRow] == -1)
+    if ([self.filmsTableView selectedRow] == -1)
         return;
     
     Screen *screen = [NSEntityDescription
@@ -322,8 +330,8 @@
                       inManagedObjectContext:managedObjectContext];
     
     // Connect up to movie
-    screen.movie = [self getSelectedMovie];
-    [[self getSelectedMovie].screens addObject: screen];
+    screen.film = [self getSelectedFilm];
+    [[self getSelectedFilm] addScreensObject: screen];
     
     // Reload to add to tableview, needed to reset row count
     [self.screensTableView reloadData];
@@ -332,12 +340,12 @@
 
 - (IBAction)removeScreen:(id)sender {
     
-    if ([self.moviesTableView selectedRow] == -1 || [self.screensTableView selectedRow] == -1)
+    if ([self.filmsTableView selectedRow] == -1 || [self.screensTableView selectedRow] == -1)
         return;
     
     // Remove from screens array and underlying object (otherwise doesn't 'save')
     Screen *screen = [[self getSelectedScreensSorted] objectAtIndex: [self.screensTableView selectedRow]];
-    [[self getSelectedMovie].screens removeObject: screen];
+    [[self getSelectedFilm] removeScreensObject: screen];
     [self.managedObjectContext deleteObject: screen];
 
     // Reload to remove from tableview, note needed to reset row count or will try to fill row out of bound of array
@@ -345,25 +353,16 @@
     [self setScreenImageView]; // And need to reset imageview of removed screen
 }
 
-- (IBAction)addMovie:(id)sender {
-    Movie *movie = [NSEntityDescription
-                    insertNewObjectForEntityForName:@"Movie"
-                    inManagedObjectContext:managedObjectContext];
+- (IBAction)removeFilm:(id)sender {
     
-    // Add to the arraycontroller (that uses binding to synch with managedobjectcontext)
-    [self.movieArrayController addObject: movie];
-}
-
-- (IBAction)removeMovie:(id)sender {
-    
-    if ([self.moviesTableView selectedRow] == -1)
+    if ([self.filmsTableView selectedRow] == -1)
         return;
     
-    Movie *movie = [self getSelectedMovie];
+    Film *film = [self getSelectedFilm];
     
     // Remove from the arraycontroller (that uses binding to sync with managedobjectcontext)
     // Note, My test showed coredata deals with 'orphan' screens
-    [self.movieArrayController removeObject: movie];
+    [self.filmArrayController removeObject: film];
     
     // Needed or if no screens on new selection leaves removed movies screens
     [self.screensTableView reloadData];
@@ -374,7 +373,7 @@
 // Here as this is when screen detailed view needs update
 - (IBAction)addTag:(id)sender {
     
-    if ([self.screensTableView selectedRow] == -1) //***Not needed at moment but when linked to screens will need 1 selected
+    if ([self.screensTableView selectedRow] == -1)
         return;
     
     Tag *tag = [NSEntityDescription
@@ -382,12 +381,20 @@
                 inManagedObjectContext:managedObjectContext];
     
     // Connect up to movie (should be screen)
-    Movie* movie = [self getSelectedMovie];
-    tag.movie = movie;
+    Screen *screen = [[self getSelectedScreensSorted] objectAtIndex: [self.screensTableView selectedRow]];
+    tag.screen = screen;
     tag.rectTopLeftX = [NSNumber numberWithFloat: 0.4f];
     tag.rectTopLeftY = [NSNumber numberWithFloat: 0.4f];
     tag.rectWidth = [NSNumber numberWithFloat: 0.2f];
     tag.rectHeight = [NSNumber numberWithFloat: 0.2f];
+    
+    //***need to choose type etc.
+    MOProp *prop = [NSEntityDescription
+                insertNewObjectForEntityForName:@"MOProp"
+                inManagedObjectContext:managedObjectContext];
+    //prop.name = [NSString stringWithString:""];
+    [prop addFilmsObject: [self getSelectedFilm]];
+    [prop addTagsObject: tag];
     
     // Add to the controller which will update the tags array via bindings and select (as select inserted objects is on)
     [self.tagsArrayController addObject: tag];
@@ -404,7 +411,7 @@
     Tag *tag = [tagsArray objectAtIndex: self.tagsArrayController.selectionIndex];  //***should I be using [self.tagsArrayController selection]?
     
     // Remove from the arraycontroller (that uses binding to sync with self.tags array) and CoreData context (not automatic)
-    [self.tagsArrayController removeObject: tag]; //*** this (sometimes!?) calls tableViewSelectionDidChange which calls setSelectedTagIndex (probably because
+    [self.tagsArrayController removeObject: tag]; //*** this (sometimes!?) calls tableViewSelectionDidChange which calls setSelectedTagIndex
     [self.managedObjectContext deleteObject: tag];
     
     // Set up and selects default tag (can't unselect as selectiondidchange not called if reselect tag 0)

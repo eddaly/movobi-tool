@@ -1,21 +1,23 @@
 //
-//  Screen.m
+//  Film.m
 //  movobi-tool
 //
 //  Created by Ed Daly on 22/04/2013.
 //  Copyright (c) 2013 Movobi Ltd. All rights reserved.
 //
 
-#import "Screen.h"
 #import "Film.h"
 
 
-@implementation Screen
+@implementation Film
 
+@dynamic name;
+@dynamic year;
 @dynamic image;
-@dynamic timeStart;
-@dynamic timeEnd;
-@dynamic tags;
-@dynamic film;
+@dynamic duration;
+@dynamic actors;
+@dynamic screens;
+@dynamic props;
+@dynamic locations;
 
 @end

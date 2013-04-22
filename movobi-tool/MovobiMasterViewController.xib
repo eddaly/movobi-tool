@@ -54,6 +54,7 @@
 						<string key="NSFrame">{{346, 30}, {90, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="68667854">
@@ -148,7 +149,7 @@
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
 													<int key="NSCellFlags">75497536</int>
 													<int key="NSCellFlags2">2048</int>
-													<string key="NSContents">Time Start</string>
+													<string key="NSContents"/>
 													<object class="NSFont" key="NSSupport" id="26">
 														<string key="NSName">LucidaGrande</string>
 														<double key="NSSize">11</double>
@@ -203,7 +204,7 @@
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
 													<int key="NSCellFlags">75497536</int>
 													<int key="NSCellFlags2">2048</int>
-													<string key="NSContents">Time End</string>
+													<string key="NSContents"/>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSBackgroundColor" ref="86421934"/>
 													<reference key="NSTextColor" ref="808927834"/>
@@ -230,7 +231,7 @@
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
 													<int key="NSCellFlags">75497536</int>
 													<int key="NSCellFlags2">2048</int>
-													<string key="NSContents">Description</string>
+													<string key="NSContents">Name</string>
 													<reference key="NSSupport" ref="26"/>
 													<object class="NSColor" key="NSBackgroundColor">
 														<int key="NSColorSpace">6</int>
@@ -501,14 +502,14 @@
 												<reference key="NSTableView" ref="48054522"/>
 											</object>
 											<object class="NSTableColumn" id="509312651">
-												<string key="NSIdentifier">time</string>
+												<string key="NSIdentifier">timeStart</string>
 												<double key="NSWidth">86</double>
 												<double key="NSMinWidth">40</double>
 												<double key="NSMaxWidth">1000</double>
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
 													<int key="NSCellFlags">75497536</int>
 													<int key="NSCellFlags2">2048</int>
-													<string key="NSContents">Time</string>
+													<string key="NSContents">Time Start</string>
 													<reference key="NSSupport" ref="26"/>
 													<reference key="NSBackgroundColor" ref="612329938"/>
 													<reference key="NSTextColor" ref="808927834"/>
@@ -831,7 +832,7 @@
 				<bool key="NSEditable">YES</bool>
 				<bool key="NSAutomaticallyPreparesContent">YES</bool>
 				<object class="_NSManagedProxy" key="_NSManagedProxy">
-					<string key="NSEntityName">Movie</string>
+					<string key="NSEntityName">Film</string>
 				</object>
 				<bool key="_NSIsUsingManagedProxy">YES</bool>
 				<bool key="NSAvoidsEmptySelection">YES</bool>
@@ -873,14 +874,6 @@
 					<int key="connectionID">108</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">moviesTableView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="925171203"/>
-					</object>
-					<int key="connectionID">109</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">addScreen:</string>
 						<reference key="source" ref="1001"/>
@@ -895,30 +888,6 @@
 						<reference key="destination" ref="694956045"/>
 					</object>
 					<int key="connectionID">126</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">addMovie:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="240885768"/>
-					</object>
-					<int key="connectionID">435</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">removeMovie:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="55715659"/>
-					</object>
-					<int key="connectionID">436</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">movieArrayController</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="643108342"/>
-					</object>
-					<int key="connectionID">437</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -961,6 +930,30 @@
 					<int key="connectionID">498</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">removeFilm:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="55715659"/>
+					</object>
+					<int key="connectionID">531</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">filmArrayController</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="643108342"/>
+					</object>
+					<int key="connectionID">532</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">filmsTableView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="925171203"/>
+					</object>
+					<int key="connectionID">534</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: arrangedObjects.name</string>
 						<reference key="source" ref="488945476"/>
@@ -993,60 +986,28 @@
 					<int key="connectionID">103</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.timeStart</string>
-						<reference key="source" ref="952447483"/>
-						<reference key="destination" ref="401338378"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="952447483"/>
-							<reference key="NSDestination" ref="401338378"/>
-							<string key="NSLabel">value: arrangedObjects.timeStart</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.timeStart</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValueTransformerName</string>
-								<string key="NS.object.0">NSNumberTransformer</string>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
+					<object class="IBActionConnection" key="connection">
+						<string key="label">add:</string>
+						<reference key="source" ref="643108342"/>
+						<reference key="destination" ref="240885768"/>
 					</object>
-					<int key="connectionID">494</int>
+					<int key="connectionID">533</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.timeEnd</string>
-						<reference key="source" ref="197026394"/>
-						<reference key="destination" ref="401338378"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="197026394"/>
-							<reference key="NSDestination" ref="401338378"/>
-							<string key="NSLabel">value: arrangedObjects.timeEnd</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.timeEnd</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValueTransformerName</string>
-								<string key="NS.object.0">NSNumberTransformer</string>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">495</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: arrangedObjects.desc</string>
+						<string key="label">value: arrangedObjects.mobject.name</string>
 						<reference key="source" ref="714711900"/>
 						<reference key="destination" ref="401338378"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="714711900"/>
 							<reference key="NSDestination" ref="401338378"/>
-							<string key="NSLabel">value: arrangedObjects.desc</string>
+							<string key="NSLabel">value: arrangedObjects.mobject.name</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">arrangedObjects.desc</string>
+							<string key="NSKeyPath">arrangedObjects.mobject.name</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">461</int>
+					<int key="connectionID">529</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1532,7 +1493,7 @@
 						<int key="objectID">51</int>
 						<reference key="object" ref="643108342"/>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">MovieArray</string>
+						<string key="objectName">FilmArray</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">54</int>
@@ -2102,7 +2063,7 @@
 				<string key="474.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="5.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="5.userInterfaceItemIdentifier">Movie Screens</string>
+				<string key="5.userInterfaceItemIdentifier">Film Screens</string>
 				<string key="508.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="51.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="524.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2117,39 +2078,68 @@
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="8.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="8.userInterfaceItemIdentifier">All Movies</string>
+				<string key="8.userInterfaceItemIdentifier">All Films</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">528</int>
+			<int key="maxID">534</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">MovobiMasterViewController</string>
 					<string key="superclassName">NSViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="addScreen:">id</string>
+						<string key="addTag:">id</string>
+						<string key="removeFilm:">id</string>
+						<string key="removeScreen:">id</string>
+						<string key="removeTag:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="addScreen:">
+							<string key="name">addScreen:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="addTag:">
+							<string key="name">addTag:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="removeFilm:">
+							<string key="name">removeFilm:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="removeScreen:">
+							<string key="name">removeScreen:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="removeTag:">
+							<string key="name">removeTag:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="movieArrayController">NSArrayController</string>
-						<string key="moviesTableView">NSTableView</string>
-						<string key="screenImageView">NSImageView</string>
+						<string key="filmArrayController">NSArrayController</string>
+						<string key="filmsTableView">NSTableView</string>
+						<string key="screenImageView">MovobiScreenImageView</string>
 						<string key="screensTableView">NSTableView</string>
 						<string key="tagsArrayController">NSArrayController</string>
 						<string key="tagsTableView">NSTableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="movieArrayController">
-							<string key="name">movieArrayController</string>
+						<object class="IBToOneOutletInfo" key="filmArrayController">
+							<string key="name">filmArrayController</string>
 							<string key="candidateClassName">NSArrayController</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="moviesTableView">
-							<string key="name">moviesTableView</string>
+						<object class="IBToOneOutletInfo" key="filmsTableView">
+							<string key="name">filmsTableView</string>
 							<string key="candidateClassName">NSTableView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="screenImageView">
 							<string key="name">screenImageView</string>
-							<string key="candidateClassName">NSImageView</string>
+							<string key="candidateClassName">MovobiScreenImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="screensTableView">
 							<string key="name">screensTableView</string>

@@ -20,10 +20,15 @@
 		6463DD8417186AA6005E224B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6463DD8317186AA6005E224B /* QuartzCore.framework */; };
 		6463DD871718925C005E224B /* cr.png in Resources */ = {isa = PBXBuildFile; fileRef = 6463DD851718925C005E224B /* cr.png */; };
 		64730B58171AE78F00B73566 /* NSNumberTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 64730B57171AE78F00B73566 /* NSNumberTransformer.m */; };
-		64730B60171AE89D00B73566 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 64730B5B171AE89D00B73566 /* Movie.m */; };
-		64730B61171AE89D00B73566 /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 64730B5D171AE89D00B73566 /* Screen.m */; };
-		64730B62171AE89D00B73566 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 64730B5F171AE89D00B73566 /* Tag.m */; };
 		64730B65171B31BC00B73566 /* MovobiScreenImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64730B64171B31BC00B73566 /* MovobiScreenImageView.m */; };
+		64CFE4041725A53600BFCEF6 /* Film.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CFE4031725A53600BFCEF6 /* Film.m */; };
+		64CFE4071725A57100BFCEF6 /* MOActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CFE4061725A57100BFCEF6 /* MOActor.m */; };
+		64CFE40A1725A58300BFCEF6 /* MObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CFE4091725A58300BFCEF6 /* MObject.m */; };
+		64CFE40D1725A5A300BFCEF6 /* MOLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CFE40C1725A5A300BFCEF6 /* MOLocation.m */; };
+		64CFE4101725A5AE00BFCEF6 /* MOProp.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CFE40F1725A5AE00BFCEF6 /* MOProp.m */; };
+		64CFE4131725A5B900BFCEF6 /* Referral.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CFE4121725A5B900BFCEF6 /* Referral.m */; };
+		64CFE4161725A5C800BFCEF6 /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CFE4151725A5C700BFCEF6 /* Screen.m */; };
+		64CFE4191725A5D700BFCEF6 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CFE4181725A5D700BFCEF6 /* Tag.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,14 +55,24 @@
 		6463DD861718925C005E224B /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/cr.png; sourceTree = "<group>"; };
 		64730B57171AE78F00B73566 /* NSNumberTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberTransformer.m; sourceTree = "<group>"; };
 		64730B59171AE79C00B73566 /* NSNumberTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberTransformer.h; sourceTree = "<group>"; };
-		64730B5A171AE89D00B73566 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
-		64730B5B171AE89D00B73566 /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
-		64730B5C171AE89D00B73566 /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
-		64730B5D171AE89D00B73566 /* Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screen.m; sourceTree = "<group>"; };
-		64730B5E171AE89D00B73566 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
-		64730B5F171AE89D00B73566 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		64730B63171B31BC00B73566 /* MovobiScreenImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovobiScreenImageView.h; sourceTree = "<group>"; };
 		64730B64171B31BC00B73566 /* MovobiScreenImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovobiScreenImageView.m; sourceTree = "<group>"; };
+		64CFE4021725A53600BFCEF6 /* Film.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Film.h; sourceTree = "<group>"; };
+		64CFE4031725A53600BFCEF6 /* Film.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Film.m; sourceTree = "<group>"; };
+		64CFE4051725A57100BFCEF6 /* MOActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOActor.h; sourceTree = "<group>"; };
+		64CFE4061725A57100BFCEF6 /* MOActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOActor.m; sourceTree = "<group>"; };
+		64CFE4081725A58300BFCEF6 /* MObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MObject.h; sourceTree = "<group>"; };
+		64CFE4091725A58300BFCEF6 /* MObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MObject.m; sourceTree = "<group>"; };
+		64CFE40B1725A5A300BFCEF6 /* MOLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOLocation.h; sourceTree = "<group>"; };
+		64CFE40C1725A5A300BFCEF6 /* MOLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOLocation.m; sourceTree = "<group>"; };
+		64CFE40E1725A5AE00BFCEF6 /* MOProp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOProp.h; sourceTree = "<group>"; };
+		64CFE40F1725A5AE00BFCEF6 /* MOProp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOProp.m; sourceTree = "<group>"; };
+		64CFE4111725A5B900BFCEF6 /* Referral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Referral.h; sourceTree = "<group>"; };
+		64CFE4121725A5B900BFCEF6 /* Referral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Referral.m; sourceTree = "<group>"; };
+		64CFE4141725A5C700BFCEF6 /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
+		64CFE4151725A5C700BFCEF6 /* Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screen.m; sourceTree = "<group>"; };
+		64CFE4171725A5D700BFCEF6 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		64CFE4181725A5D700BFCEF6 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,23 +128,13 @@
 		6463DD1717170036005E224B /* movobi-tool */ = {
 			isa = PBXGroup;
 			children = (
-				64730B5A171AE89D00B73566 /* Movie.h */,
-				64730B5B171AE89D00B73566 /* Movie.m */,
-				64730B5C171AE89D00B73566 /* Screen.h */,
-				64730B5D171AE89D00B73566 /* Screen.m */,
-				64730B5E171AE89D00B73566 /* Tag.h */,
-				64730B5F171AE89D00B73566 /* Tag.m */,
-				6463DD4617170BB6005E224B /* MovobiImageTransformer.h */,
-				64730B59171AE79C00B73566 /* NSNumberTransformer.h */,
-				6463DD4717170BB6005E224B /* MovobiImageTransformer.m */,
-				64730B57171AE78F00B73566 /* NSNumberTransformer.m */,
-				6463DD40171705C3005E224B /* Movobi.xcdatamodeld */,
+				64CFE41C1725A64D00BFCEF6 /* XIBs */,
+				64CFE41B1725A63000BFCEF6 /* Transformers */,
+				64CFE41A1725A5E600BFCEF6 /* datamodel */,
 				6463DD2317170036005E224B /* MovobiAppDelegate.h */,
 				6463DD2417170036005E224B /* MovobiAppDelegate.m */,
-				6463DD2617170036005E224B /* MainMenu.xib */,
 				6463DD4C171726BA005E224B /* MovobiMasterViewController.h */,
 				6463DD4D171726BA005E224B /* MovobiMasterViewController.m */,
-				6463DD4E171726BA005E224B /* MovobiMasterViewController.xib */,
 				64730B63171B31BC00B73566 /* MovobiScreenImageView.h */,
 				64730B64171B31BC00B73566 /* MovobiScreenImageView.m */,
 				6463DD1817170036005E224B /* Supporting Files */,
@@ -148,6 +153,50 @@
 				6463DD2017170036005E224B /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		64CFE41A1725A5E600BFCEF6 /* datamodel */ = {
+			isa = PBXGroup;
+			children = (
+				6463DD40171705C3005E224B /* Movobi.xcdatamodeld */,
+				64CFE4171725A5D700BFCEF6 /* Tag.h */,
+				64CFE4181725A5D700BFCEF6 /* Tag.m */,
+				64CFE4141725A5C700BFCEF6 /* Screen.h */,
+				64CFE4151725A5C700BFCEF6 /* Screen.m */,
+				64CFE4111725A5B900BFCEF6 /* Referral.h */,
+				64CFE4121725A5B900BFCEF6 /* Referral.m */,
+				64CFE40E1725A5AE00BFCEF6 /* MOProp.h */,
+				64CFE40F1725A5AE00BFCEF6 /* MOProp.m */,
+				64CFE40B1725A5A300BFCEF6 /* MOLocation.h */,
+				64CFE40C1725A5A300BFCEF6 /* MOLocation.m */,
+				64CFE4081725A58300BFCEF6 /* MObject.h */,
+				64CFE4091725A58300BFCEF6 /* MObject.m */,
+				64CFE4051725A57100BFCEF6 /* MOActor.h */,
+				64CFE4061725A57100BFCEF6 /* MOActor.m */,
+				64CFE4021725A53600BFCEF6 /* Film.h */,
+				64CFE4031725A53600BFCEF6 /* Film.m */,
+			);
+			name = datamodel;
+			sourceTree = "<group>";
+		};
+		64CFE41B1725A63000BFCEF6 /* Transformers */ = {
+			isa = PBXGroup;
+			children = (
+				6463DD4617170BB6005E224B /* MovobiImageTransformer.h */,
+				64730B59171AE79C00B73566 /* NSNumberTransformer.h */,
+				6463DD4717170BB6005E224B /* MovobiImageTransformer.m */,
+				64730B57171AE78F00B73566 /* NSNumberTransformer.m */,
+			);
+			name = Transformers;
+			sourceTree = "<group>";
+		};
+		64CFE41C1725A64D00BFCEF6 /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				6463DD4E171726BA005E224B /* MovobiMasterViewController.xib */,
+				6463DD2617170036005E224B /* MainMenu.xib */,
+			);
+			name = XIBs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,10 +272,15 @@
 				6463DD4817170BB6005E224B /* MovobiImageTransformer.m in Sources */,
 				6463DD4F171726BA005E224B /* MovobiMasterViewController.m in Sources */,
 				64730B58171AE78F00B73566 /* NSNumberTransformer.m in Sources */,
-				64730B60171AE89D00B73566 /* Movie.m in Sources */,
-				64730B61171AE89D00B73566 /* Screen.m in Sources */,
-				64730B62171AE89D00B73566 /* Tag.m in Sources */,
 				64730B65171B31BC00B73566 /* MovobiScreenImageView.m in Sources */,
+				64CFE4041725A53600BFCEF6 /* Film.m in Sources */,
+				64CFE4071725A57100BFCEF6 /* MOActor.m in Sources */,
+				64CFE40A1725A58300BFCEF6 /* MObject.m in Sources */,
+				64CFE40D1725A5A300BFCEF6 /* MOLocation.m in Sources */,
+				64CFE4101725A5AE00BFCEF6 /* MOProp.m in Sources */,
+				64CFE4131725A5B900BFCEF6 /* Referral.m in Sources */,
+				64CFE4161725A5C800BFCEF6 /* Screen.m in Sources */,
+				64CFE4191725A5D700BFCEF6 /* Tag.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
