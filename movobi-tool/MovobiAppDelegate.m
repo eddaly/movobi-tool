@@ -33,6 +33,11 @@
     self.masterViewController.view.frame = ((NSView*)self.window.contentView).bounds;
 }
 
+-(BOOL) saveFilmImage;
+{
+    return self.masterViewController.saveFilmImage;
+}
+
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "movobi.movobi_tool" in the user's Application Support directory.
 - (NSURL *)applicationFilesDirectory
 {
@@ -139,6 +144,9 @@
 {
     NSError *error = nil;
     
+    // Set this flag for benefit of valuetransformer (needs to save image in representation iOS can handle)
+    self.masterViewController.saveFilmImage = TRUE;
+    
     if (![[self managedObjectContext] commitEditing]) {
         NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
     }
@@ -146,6 +154,8 @@
     if (![[self managedObjectContext] save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
     }
+    
+    self.masterViewController.saveFilmImage = FALSE; // Reset flag
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
@@ -155,6 +165,9 @@
     if (!_managedObjectContext) {
         return NSTerminateNow;
     }
+    
+    // Set this flag for benefit of valuetransformer (needs to save image in representation iOS can handle)
+    self.masterViewController.saveFilmImage = TRUE;
     
     if (![[self managedObjectContext] commitEditing]) {
         NSLog(@"%@:%@ unable to commit editing to terminate", [self class], NSStringFromSelector(_cmd));

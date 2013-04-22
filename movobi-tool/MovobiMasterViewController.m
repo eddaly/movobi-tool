@@ -21,13 +21,14 @@
 
 @synthesize managedObjectContext;
 @synthesize tags;
+@synthesize saveFilmImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-
+        saveFilmImage = FALSE; // Only set this flag if saving to CoreData (self Transformer so save image representation)
     }
     
     return self;
@@ -69,10 +70,13 @@
     [self.screensTableView setDataSource: self];
     [self.tagsTableView setDelegate: self];
     [self.screensTableView setTarget:self];
-    [self.screensTableView setDoubleAction: @selector(doubleClick:)];
-    [self.screenImageView setAction: @selector(mouseUp:)];
+    [self.screensTableView setDoubleAction: @selector(doubleClickSelectImage:)];
     [self.screenImageView setTarget: self];
+    [self.screenImageView setAction: @selector(mouseUp:)];
+    [self.filmsTableView setTarget:self];
+    [self.filmsTableView setDoubleAction: @selector(doubleClickSelectImage:)];
 
+    
     // Sort array controllers (and therefore tables)
     NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     [self.filmArrayController setSortDescriptors: [NSArray arrayWithObject:nameDescriptor]];
@@ -191,6 +195,9 @@
             if ([columnIdentifer isEqualToString:@"timeStart"]) {
                 returnValue = screen.timeStart;
             }
+            else if ([columnIdentifer isEqualToString:@"timeEnd"]) {
+                returnValue = screen.timeEnd;
+            }
             else if ([columnIdentifer isEqualToString:@"image"]) {
                 returnValue = screen.image;
             }
@@ -206,7 +213,8 @@
         if ([self getSelectedFilm].screens != nil) {
             NSString *columnIdentifer = [aTableColumn identifier];
     
-            if ([columnIdentifer isEqualToString:@"timeStart"]) {
+            if ([columnIdentifer isEqualToString:@"timeStart"] || [columnIdentifer isEqualToString:@"timeEnd"])
+            {
                 NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
                 [f setNumberStyle:NSNumberFormatterDecimalStyle];
                 NSNumber * time = [f numberFromString: anObject];
@@ -215,7 +223,10 @@
                 NSInteger row = [self.screensTableView selectedRow];
                 NSArray *screens = [self getSelectedScreensSorted];
                 Screen *screen = [screens objectAtIndex: row];
-                screen.timeStart = time;
+                if ([columnIdentifer isEqualToString:@"timeStart"])
+                    screen.timeStart = time;
+                else
+                    screen.timeEnd = time;
             }
             else if ([columnIdentifer isEqualToString:@"image"]) {
             }
@@ -278,13 +289,14 @@
     }
 }
 
-- (void)doubleClick:(id)object { // Catch click on image cell to pop up box to set it
+- (void)doubleClickSelectImage:(id)object { // Catch click on image cell to pop up box to set it
     
-    NSInteger rowIndex = [self.screensTableView clickedRow];
-    NSInteger colIndex = [self.screensTableView clickedColumn];
+    NSTableView *tableView = object;
+    NSInteger rowIndex = [tableView clickedRow];
+    NSInteger colIndex = [tableView clickedColumn];
     if (rowIndex != -1 && colIndex != -1) // If clicked on screen table properly
     {
-        NSArray *columns = [self.screensTableView tableColumns];
+        NSArray *columns = [tableView tableColumns];
         int i = 0;
         for (NSTableColumn *col in columns)
         {
@@ -303,9 +315,16 @@
                     NSImage *image = [[NSImage alloc] initWithContentsOfURL: imageName];
                     if (image != nil) // If this is an image, update the screen
                     {
-                        Screen *screen = [[self getSelectedScreensSorted] objectAtIndex: rowIndex];
-                        screen.image = image;
-                        [self setScreenImageView]; // And need to reset imageview new screen
+                        if (object == self.screensTableView)
+                        {
+                            Screen *screen = [[self getSelectedScreensSorted] objectAtIndex: rowIndex];
+                            screen.image = image;
+                            [self setScreenImageView]; // And need to reset imageview new screen
+                        }
+                        else if (object == self.filmsTableView)
+                        {
+                            [self getSelectedFilm].image = image;
+                        }
                     }
                 }
                 return;
@@ -314,7 +333,7 @@
             {   // According to 'people' shouldn't be neccessary as this only called on columns that
                 // are not 'editable', but it's call on them all so can't use that as a mask
                 // Programmatically trigger edit
-                [self.screensTableView editColumn:colIndex row:rowIndex withEvent:nil select:TRUE];
+                [tableView editColumn:colIndex row:rowIndex withEvent:nil select:TRUE];
             }
         }
     }

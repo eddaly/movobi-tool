@@ -24,16 +24,22 @@
 - (id)transformedValue:(id)value
 {
     NSImage *img = (NSImage *)value;
-    CGImageRef CGImage = [img CGImageForProposedRect:nil context:nil hints:nil];
-    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithCGImage:CGImage];
-    NSData *data = [rep representationUsingType: NSPNGFileType properties: nil];
-	return data;
+    if (img != nil)
+    {
+        CGImageRef CGImage = [img CGImageForProposedRect:nil context:nil hints:nil];
+        NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithCGImage:CGImage];
+        return [rep representationUsingType: NSPNGFileType properties: nil];
+    }
+    else
+        return nil;
 }
 
 - (id)reverseTransformedValue:(id)value
 {
-	NSImage *image = [[NSImage alloc] initWithData:value];
-    return image;
+	if (value != nil)
+        return [[NSImage alloc] initWithData:value];
+    else
+        return nil;
 }
 
 @end

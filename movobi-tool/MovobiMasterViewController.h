@@ -19,5 +19,6 @@
 @property (strong) IBOutlet NSArrayController *tagsArrayController;
 @property (weak) IBOutlet NSTableView *tagsTableView;
 @property (strong) IBOutlet NSArrayController *filmArrayController;
+@property (atomic) BOOL saveFilmImage;
 
 @end

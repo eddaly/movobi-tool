@@ -29,6 +29,7 @@
 		64CFE4131725A5B900BFCEF6 /* Referral.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CFE4121725A5B900BFCEF6 /* Referral.m */; };
 		64CFE4161725A5C800BFCEF6 /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CFE4151725A5C700BFCEF6 /* Screen.m */; };
 		64CFE4191725A5D700BFCEF6 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CFE4181725A5D700BFCEF6 /* Tag.m */; };
+		64CFE4211725D4FC00BFCEF6 /* MovobiImageTransformerFilmImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CFE4201725D4FC00BFCEF6 /* MovobiImageTransformerFilmImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,8 @@
 		64CFE4151725A5C700BFCEF6 /* Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screen.m; sourceTree = "<group>"; };
 		64CFE4171725A5D700BFCEF6 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
 		64CFE4181725A5D700BFCEF6 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
+		64CFE41F1725D4EF00BFCEF6 /* MovobiImageTransformerFilmImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovobiImageTransformerFilmImage.h; sourceTree = "<group>"; };
+		64CFE4201725D4FC00BFCEF6 /* MovobiImageTransformerFilmImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovobiImageTransformerFilmImage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,8 +186,10 @@
 			isa = PBXGroup;
 			children = (
 				6463DD4617170BB6005E224B /* MovobiImageTransformer.h */,
+				64CFE41F1725D4EF00BFCEF6 /* MovobiImageTransformerFilmImage.h */,
 				64730B59171AE79C00B73566 /* NSNumberTransformer.h */,
 				6463DD4717170BB6005E224B /* MovobiImageTransformer.m */,
+				64CFE4201725D4FC00BFCEF6 /* MovobiImageTransformerFilmImage.m */,
 				64730B57171AE78F00B73566 /* NSNumberTransformer.m */,
 			);
 			name = Transformers;
@@ -281,6 +286,7 @@
 				64CFE4131725A5B900BFCEF6 /* Referral.m in Sources */,
 				64CFE4161725A5C800BFCEF6 /* Screen.m in Sources */,
 				64CFE4191725A5D700BFCEF6 /* Tag.m in Sources */,
+				64CFE4211725D4FC00BFCEF6 /* MovobiImageTransformerFilmImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
