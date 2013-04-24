@@ -6,7 +6,9 @@
 //  Copyright (c) 2013 Movobi Ltd. All rights reserved.
 //
 
-#import "MovobiImageTransformer.h"
+@interface MovobiImageTransformer : NSValueTransformer
+
+@end
 
 @implementation MovobiImageTransformer
 

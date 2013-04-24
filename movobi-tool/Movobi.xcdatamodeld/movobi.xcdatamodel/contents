@@ -2,38 +2,30 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12D78" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Film" representedClassName="Film" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="MovobiImageTransformerFilmImage" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="MovobiImageTransformer" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="year" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="actors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MOActor" inverseName="films" inverseEntity="MOActor" syncable="YES"/>
-        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MOLocation" inverseName="films" inverseEntity="MOLocation" syncable="YES"/>
-        <relationship name="props" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MOProp" inverseName="films" inverseEntity="MOProp" syncable="YES"/>
+        <relationship name="mobjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MObject" inverseName="films" inverseEntity="MObject" syncable="YES"/>
         <relationship name="screens" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Screen" inverseName="film" inverseEntity="Screen" syncable="YES"/>
     </entity>
     <entity name="MOActor" representedClassName="MOActor" parentEntity="MObject" syncable="YES">
-        <attribute name="characterName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="films" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Film" inverseName="actors" inverseEntity="Film" syncable="YES"/>
+        <relationship name="characters" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="MOCharacter" inverseName="actors" inverseEntity="MOCharacter" syncable="YES"/>
     </entity>
     <entity name="MObject" representedClassName="MObject" isAbstract="YES" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="referrals" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Referral" inverseName="mobject" inverseEntity="Referral" syncable="YES"/>
-        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Tag" inverseName="mobject" inverseEntity="Tag" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="films" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Film" inverseName="mobjects" inverseEntity="Film" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="mobjects" inverseEntity="Tag" syncable="YES"/>
+    </entity>
+    <entity name="MOCharacter" representedClassName="MOCharacter" parentEntity="MObject" syncable="YES">
+        <relationship name="actors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MOActor" inverseName="characters" inverseEntity="MOActor" syncable="YES"/>
     </entity>
     <entity name="MOLocation" representedClassName="MOLocation" parentEntity="MObject" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="films" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Film" inverseName="locations" inverseEntity="Film" syncable="YES"/>
     </entity>
-    <entity name="MOProp" representedClassName="MOProp" parentEntity="MObject" syncable="YES">
-        <relationship name="films" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Film" inverseName="props" inverseEntity="Film" syncable="YES"/>
-    </entity>
-    <entity name="Referral" representedClassName="Referral" syncable="YES">
-        <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="MovobiImageTransformer" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="owner" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="mobject" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MObject" inverseName="referrals" inverseEntity="MObject" syncable="YES"/>
-    </entity>
+    <entity name="MOProp" representedClassName="MOProp" parentEntity="MObject" syncable="YES"/>
     <entity name="Screen" representedClassName="Screen" syncable="YES">
         <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="MovobiImageTransformer" syncable="YES"/>
         <attribute name="timeEnd" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -42,21 +34,22 @@
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="screen" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rectHeight" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="rectTopLeftX" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="rectTopLeftY" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="rectWidth" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="mobject" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MObject" inverseName="tags" inverseEntity="MObject" syncable="YES"/>
+        <relationship name="mobjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MObject" inverseName="tags" inverseEntity="MObject" syncable="YES"/>
         <relationship name="screen" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Screen" inverseName="tags" inverseEntity="Screen" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Film" positionX="-200" positionY="-100" width="128" height="163"/>
+        <element name="Film" positionX="-200" positionY="-153" width="128" height="133"/>
+        <element name="MOActor" positionX="-162" positionY="212" width="128" height="58"/>
+        <element name="MObject" positionX="-153" positionY="23" width="128" height="118"/>
+        <element name="MOLocation" positionX="-162" positionY="279" width="128" height="73"/>
+        <element name="MOProp" positionX="-11" positionY="279" width="128" height="43"/>
         <element name="Screen" positionX="-351" positionY="8" width="128" height="118"/>
-        <element name="Tag" positionX="-335" positionY="171" width="128" height="133"/>
-        <element name="MObject" positionX="-137" positionY="245" width="128" height="88"/>
-        <element name="Referral" positionX="36" positionY="260" width="128" height="118"/>
-        <element name="MOActor" positionX="-29" positionY="-54" width="128" height="73"/>
-        <element name="MOProp" positionX="-29" positionY="126" width="128" height="58"/>
-        <element name="MOLocation" positionX="-29" positionY="27" width="128" height="88"/>
+        <element name="Tag" positionX="-335" positionY="171" width="128" height="148"/>
+        <element name="MOCharacter" positionX="-11" positionY="212" width="128" height="58"/>
     </elements>
 </model>

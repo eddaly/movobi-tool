@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MovobiMasterViewController.h"
 
 @interface MovobiAppDelegate : NSObject <NSApplicationDelegate>
 
@@ -17,6 +18,5 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 - (IBAction)saveAction:(id)sender;
--(BOOL) saveFilmImage;
 
 @end

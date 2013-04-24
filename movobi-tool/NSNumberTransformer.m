@@ -6,7 +6,9 @@
 //  Copyright (c) 2013 Movobi Ltd. All rights reserved.
 //
 
-#import "NSNumberTransformer.h"
+@interface NSNumberTransformer : NSValueTransformer
+
+@end
 
 @implementation NSNumberTransformer
 
@@ -18,7 +20,7 @@
 
 + (Class)transformedValueClass
 {
-    return [NSData class];
+    return [NSString class];
 }
 
 - (id)transformedValue:(id)value

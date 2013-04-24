@@ -2,26 +2,26 @@
 //  MOActor.h
 //  movobi-tool
 //
-//  Created by Ed Daly on 22/04/2013.
+//  Created by Ed Daly on 23/04/2013.
 //  Copyright (c) 2013 Movobi Ltd. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "MObject.h"
 
-@class Film;
+@class MOCharacter;
 
-@interface MOActor : NSManagedObject
+@interface MOActor : MObject
 
-@property (nonatomic, retain) NSString * characterName;
-@property (nonatomic, retain) NSSet *films;
+@property (nonatomic, retain) NSSet *characters;
 @end
 
 @interface MOActor (CoreDataGeneratedAccessors)
 
-- (void)addFilmsObject:(Film *)value;
-- (void)removeFilmsObject:(Film *)value;
-- (void)addFilms:(NSSet *)values;
-- (void)removeFilms:(NSSet *)values;
+- (void)addCharactersObject:(MOCharacter *)value;
+- (void)removeCharactersObject:(MOCharacter *)value;
+- (void)addCharacters:(NSSet *)values;
+- (void)removeCharacters:(NSSet *)values;
 
 @end
