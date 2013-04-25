@@ -32,5 +32,10 @@
 @property (strong) IBOutlet NSPanel *mopropPanel;
 @property (strong) IBOutlet NSPanel *molocationPanel;
 @property (weak) IBOutlet NSBox *mobjectBox;
+@property (strong) IBOutlet NSArrayController *moactorCharacterArrayController;
+@property (weak) IBOutlet NSButtonCell *addMOCharacterToMOActorButton;
+@property (weak) IBOutlet NSButton *addMObjectToTagButton;
+@property (strong) IBOutlet NSArrayController *filmMOCharacterArrayController;
+@property (strong) IBOutlet NSPanel *filmMOCharactersPanel;
 
 @end

@@ -80,6 +80,7 @@
     [self.mobjectsTableView setDelegate: self];
     [self.mobjectsTableView setTarget:self];
     [self.mobjectsTableView setDoubleAction: @selector(doubleClickSelectImage:)];
+    [self.allMObjectsTableView setDelegate: self];
     [self.allMObjectsTableView setTarget:self];
     [self.allMObjectsTableView setDoubleAction: @selector(doubleClickSelectImage:)];
     
@@ -277,8 +278,42 @@
     [self setupTagRects];
 }
 
+- (void)updateAddMObjectToTagButton
+{
+    // If have an MObject to add
+    if (self.mobjectsArrayController.selectionIndex != NSNotFound)
+    {
+        // And if have a Tag
+        if (self.tagsArrayController.selectionIndex != NSNotFound)
+        {
+            [self.addMObjectToTagButton setEnabled:YES]; // Then enable button to add character to actor
+            return;
+        }
+    }
+    [self.addMObjectToTagButton setEnabled:NO];
+}
+
+/*- (void)updateAddMOCharacterToMOActorButton
+{
+    // If selecting an MOCharacter in all MObjects
+    MObject *mobject = [self.allMObjectsArrayController valueForKeyPath:@"selection.self"];
+    if ([mobject isMemberOfClass:[MOCharacter class]])
+    {
+        // And selecting an MOActor
+        mobject = [self.mobjectsArrayController valueForKeyPath:@"selection.self"];
+        if ([mobject isMemberOfClass:[MOActor class]])
+        {
+            [self.addMOCharacterToMOActorButton setEnabled:YES]; // Then enable button to add character to actor
+            return;
+        }
+    }
+    [self.addMOCharacterToMOActorButton setEnabled:NO];
+}*/
+
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
+    [self updateAddMObjectToTagButton];
+    
     NSTableView *aTableView = [aNotification object];
     NSInteger row = [aTableView selectedRow];
     if (row == -1)
@@ -297,6 +332,10 @@
     {
         [self.screenImageView setSelectedTagIndex: [NSNumber numberWithInteger: self.tagsArrayController.selectionIndex]];
         [self.screenImageView setNeedsDisplay];
+    }
+    else if (aTableView == self.allMObjectsTableView)
+    {
+        //[self updateAddMOCharacterToMOActorButton]; when ok to delete do I still need delegate?
     }
     else if (aTableView == self.mobjectsTableView)
     {
@@ -389,6 +428,26 @@
     }
 }
 
+- (IBAction)addMOCharacterToMOActorButton:(id)sender
+{
+    // Populate array controller used by modal window table with characters only
+    NSArray *mobjectsArray = [self.mobjectsArrayController arrangedObjects];
+    for (MObject *mobject in mobjectsArray)
+    {
+        if ([mobject isMemberOfClass:[MOCharacter class]])
+        {
+            MOCharacter *mocharacter = (MOCharacter*)mobject;
+            [self.filmMOCharacterArrayController addObject:mocharacter];
+        }
+    }
+    [[NSApplication sharedApplication] runModalForWindow:self.filmMOCharactersPanel];
+}
+
+- (IBAction)filmMOCharactersPanelCancel:(id)sender {
+    [[NSApplication sharedApplication] stopModal];
+    [self.filmMOCharactersPanel close];
+}
+
 - (IBAction)addScreen:(id)sender {
     
     if ([self.filmsTableView selectedRow] == -1)
@@ -414,7 +473,7 @@
     
     // Remove from screens array and underlying object (otherwise doesn't 'save')
     Screen *screen = [self getScreenAtIndex: [self.screensTableView selectedRow]];
-    [[self film] removeScreensObject: screen];
+    [[self film] removeScreensObject: screen]; //***doesn't delete rules handle this?
     [self.managedObjectContext deleteObject: screen];
 
     // Reload to remove from tableview, note needed to reset row count or will try to fill row out of bound of array
@@ -456,17 +515,6 @@
     tag.rectTopLeftY = [NSNumber numberWithFloat: 0.4f];
     tag.rectWidth = [NSNumber numberWithFloat: 0.2f];
     tag.rectHeight = [NSNumber numberWithFloat: 0.2f];
-    
-    //***need to choose type etc. this is a hack to allow test data for now
-    {
-        MOProp *prop = [NSEntityDescription
-                insertNewObjectForEntityForName:@"MOProp"
-                inManagedObjectContext:managedObjectContext];
-        //prop.name = [NSString stringWithString:""];
-        [prop addFilmsObject: [self film]];
-        [prop addTagsObject: tag];
-        [tag addMobjectsObject: prop];
-    }
     
     // Add to the controller which will update the tags array via bindings and select (as select inserted objects is on)
     [self.tagsArrayController addObject: tag];
@@ -529,6 +577,26 @@
     MObject *mobject = [self.allMObjectsArrayController valueForKeyPath:@"selection.self"];
     [mobject addFilmsObject: [self film]];// Seems no need to add to ArrayController, they synch themselves just fine
     [[self film] addMobjectsObject: mobject];
+}
+
+- (IBAction)addMOCharacterToMOActor:(id)sender {
+    
+    if ([self.filmMOCharacterArrayController selection] == NSNoSelectionMarker)
+        return;
+    MOCharacter *mocharacter = [self.filmMOCharacterArrayController valueForKeyPath:@"selection.self"];
+    MOActor *moactor = [self.mobjectsArrayController valueForKeyPath:@"selection.self"];
+    
+    [moactor addCharactersObject:mocharacter];
+    [mocharacter addActorsObject:moactor];
+}
+- (IBAction)addMObjectToTag:(id)sender {
+
+    // Note relying on button enabling to ensure MObject types are correct
+    MObject *mobject = [self.mobjectsArrayController valueForKeyPath:@"selection.self"];
+    Tag *tag = [self.tagsArrayController valueForKeyPath:@"selection.self"];
+    
+    [mobject addTagsObject:tag];
+    [tag addMobjectsObject:mobject];
 }
 
 // Sent from the ScreenImageView to tell controller selected tag rect has changed

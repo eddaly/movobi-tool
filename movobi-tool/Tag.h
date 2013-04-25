@@ -2,7 +2,7 @@
 //  Tag.h
 //  movobi-tool
 //
-//  Created by Ed Daly on 23/04/2013.
+//  Created by Ed Daly on 25/04/2013.
 //  Copyright (c) 2013 Movobi Ltd. All rights reserved.
 //
 
@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSNumber * rectTopLeftY;
 @property (nonatomic, retain) NSNumber * rectWidth;
 @property (nonatomic, retain) NSString * desc;
+@property (nonatomic, retain) NSNumber * flags;
+@property (nonatomic, retain) NSData * data;
 @property (nonatomic, retain) NSSet *mobjects;
 @property (nonatomic, retain) Screen *screen;
 @end

@@ -2,7 +2,7 @@
 //  Tag.m
 //  movobi-tool
 //
-//  Created by Ed Daly on 23/04/2013.
+//  Created by Ed Daly on 25/04/2013.
 //  Copyright (c) 2013 Movobi Ltd. All rights reserved.
 //
 
@@ -18,6 +18,8 @@
 @dynamic rectTopLeftY;
 @dynamic rectWidth;
 @dynamic desc;
+@dynamic flags;
+@dynamic data;
 @dynamic mobjects;
 @dynamic screen;
 

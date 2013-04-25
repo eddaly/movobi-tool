@@ -2,7 +2,7 @@
 //  MObject.m
 //  movobi-tool
 //
-//  Created by Ed Daly on 24/04/2013.
+//  Created by Ed Daly on 25/04/2013.
 //  Copyright (c) 2013 Movobi Ltd. All rights reserved.
 //
 
@@ -16,6 +16,8 @@
 @dynamic name;
 @dynamic image;
 @dynamic url;
+@dynamic flags;
+@dynamic data;
 @dynamic tags;
 @dynamic films;
 
