@@ -32,7 +32,7 @@
     if (highlighted)
     {
         blendMode = kCGBlendModePlusLighter;
-        colour = [NSColor whiteColor];
+        colour = [NSColor greenColor];
     }
     else
     {

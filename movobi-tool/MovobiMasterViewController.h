@@ -13,9 +13,6 @@
 @interface MovobiMasterViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (strong, nonatomic) Film *_film;
-@property (strong, nonatomic) NSSet *screens;
-@property (strong, nonatomic) NSSet *tags;
 @property (weak) IBOutlet NSTableView *filmsTableView;
 @property (weak) IBOutlet NSTableView *screensTableView;
 @property (weak) IBOutlet MovobiScreenImageView *screenImageView;
@@ -33,9 +30,9 @@
 @property (strong) IBOutlet NSPanel *molocationPanel;
 @property (weak) IBOutlet NSBox *mobjectBox;
 @property (strong) IBOutlet NSArrayController *moactorCharacterArrayController;
-@property (weak) IBOutlet NSButtonCell *addMOCharacterToMOActorButton;
 @property (weak) IBOutlet NSButton *addMObjectToTagButton;
 @property (strong) IBOutlet NSArrayController *filmMOCharacterArrayController;
 @property (strong) IBOutlet NSPanel *filmMOCharactersPanel;
+@property (strong) IBOutlet NSArrayController *screensArrayController;
 
 @end
