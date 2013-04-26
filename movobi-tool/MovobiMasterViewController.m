@@ -27,10 +27,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-
-    }
+    if (self) {}
     
     return self;
 }
@@ -39,20 +36,22 @@
 {
     [super loadView];
     
-    [self.filmsTableView setDelegate: self];
-    [self.filmsTableView setTarget:self];
-    [self.filmsTableView setDoubleAction: @selector(doubleClickSelectImage:)];
-    [self.screensTableView setDelegate: self];
-    [self.screensTableView setTarget:self];
-    [self.screensTableView setDoubleAction: @selector(doubleClickSelectImage:)];
-    [self.screenImageView setTarget: self];
-    [self.screenImageView setAction: @selector(mouseUp:)];
+    // Delegates to handle changing selection
     [self.tagsTableView setDelegate: self];
     [self.mobjectsTableView setDelegate: self];
+    
+    // Set-up actions for image selection and synching tags with view
+    [self.filmsTableView setTarget:self];
+    [self.filmsTableView setDoubleAction: @selector(doubleClickSelectImage:)];
+    [self.screensTableView setTarget:self];
+    [self.screensTableView setDoubleAction: @selector(doubleClickSelectImage:)];
     [self.mobjectsTableView setTarget:self];
     [self.mobjectsTableView setDoubleAction: @selector(doubleClickSelectImage:)];
     [self.allMObjectsTableView setTarget:self];
     [self.allMObjectsTableView setDoubleAction: @selector(doubleClickSelectImage:)];
+    [self.screenImageView setTarget: self];
+    [self.screenImageView setMouseUpAction: @selector(mouseUp:)];
+    [self.screenImageView setDrawRectAction: @selector(drawRect:)];
     
     // Sort array controllers (and therefore tables)
     NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
@@ -72,38 +71,30 @@
 
 - (void)updateAddMObjectToTagButton
 {
-    // If have an MObject to add
-    if (self.mobjectsArrayController.selectionIndex != NSNotFound)
-    {
-        // And if have a Tag
-        if (self.tagsArrayController.selectionIndex != NSNotFound)
-        {
-            [self.addMObjectToTagButton setEnabled:YES];
-            return;
-        }
-    }
-    [self.addMObjectToTagButton setEnabled:NO];
+    // If have an MObject to add and a Tag to add to
+    if (self.mobjectsArrayController.selectionIndex != NSNotFound && self.tagsArrayController.selectionIndex != NSNotFound)
+        [self.addMObjectToTagButton setEnabled:YES];
+    else
+        [self.addMObjectToTagButton setEnabled:NO];
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-    [self updateAddMObjectToTagButton];
+    [self updateAddMObjectToTagButton]; // Check whether can enable this button now
     
     NSTableView *aTableView = [aNotification object];
     NSInteger row = [aTableView selectedRow];
     if (row == -1)
         return;
     
-    // If change movie or screen, need to update tag rects
-    if (aTableView == self.filmsTableView || aTableView == self.screensTableView)
-    {
-        [self setupTagRects];
-    }
+    // If change tag selection update the screen view
     if (aTableView == self.tagsTableView)
     {
         [self.screenImageView setSelectedTagIndex: [NSNumber numberWithInteger: self.tagsArrayController.selectionIndex]];
         [self.screenImageView setNeedsDisplay];
+        
     }
+    // If it's the MObject's table then update then switch in the 'detail view'
     else if (aTableView == self.mobjectsTableView)
     {
         MObject *mobject = [self.mobjectsArrayController valueForKeyPath:@"selection.self"];
@@ -133,8 +124,9 @@
     }
 }
 
-- (void)doubleClickSelectImage:(id)object { // Catch click on image cell to pop up box to set it
-    
+// Catch click on image cell to pop up box to set it
+- (void)doubleClickSelectImage:(id)object
+{
     NSTableView *tableView = object;
     NSInteger rowIndex = [tableView clickedRow];
     NSInteger colIndex = [tableView clickedColumn];
@@ -197,6 +189,7 @@
 {
     // Populate array controller used by modal window table with characters only
     NSArray *mobjectsArray = [self.mobjectsArrayController arrangedObjects];
+    [self.filmMOCharacterArrayController removeObjects: [self.filmMOCharacterArrayController arrangedObjects]];
     for (MObject *mobject in mobjectsArray)
     {
         if ([mobject isMemberOfClass:[MOCharacter class]])
@@ -213,6 +206,16 @@
     [self.filmMOCharactersPanel close];
 }
 
+- (IBAction)removeFilm:(id)sender {
+    
+    if ([self.filmsTableView selectedRow] == -1)
+        return;
+    
+    // Remove from the arraycontroller (that uses binding to sync with managedobjectcontext)
+    [self.filmArrayController removeObject: [self selectedFilm]];
+}
+
+
 - (IBAction)addScreen:(id)sender {
     
     if ([self.filmsTableView selectedRow] == -1)
@@ -222,13 +225,8 @@
                       insertNewObjectForEntityForName:@"Screen"
                       inManagedObjectContext:managedObjectContext];
     
-    // Connect up to film
+    // Connect up to film (note, only need set-up one way core data does inverse)
     screen.film = [self selectedFilm];
-    [[self selectedFilm] addScreensObject: screen];
-    
-    //[self.screensArrayController addObject: screen];shouldnt be needed with above
-    
-    [self setupTagRects]; // note sure if needed
 }
 
 - (IBAction)removeScreen:(id)sender {
@@ -236,23 +234,9 @@
     if ([self.filmsTableView selectedRow] == -1 || [self.screensTableView selectedRow] == -1)
         return;
     
-    // Remove from screens array and underlying object (otherwise doesn't 'save')
+    // Remove from CoreData (automatically removes from controller arrays and from owning film)
     Screen *screen = [self.screensArrayController valueForKeyPath:@"selection.self"];
-    [[self selectedFilm] removeScreensObject: screen]; //***doesn't delete rules handle this?
-    [self.managedObjectContext deleteObject: screen]; // Note getting error 'film is required value' on save without this, same error if I ditch this for just sending remove to the arraycontroller (works for mobjects?)
-
-    [self setupTagRects]; // Not sure if always needed
-}
-
-- (IBAction)removeFilm:(id)sender {
-    
-    if ([self.filmsTableView selectedRow] == -1)
-        return;
-    
-    // Remove from the arraycontroller (that uses binding to sync with managedobjectcontext)
-    [self.filmArrayController removeObject: [self selectedFilm]];
-    
-    [self setupTagRects]; // Not sure if always needed
+    [self.managedObjectContext deleteObject: screen];// Also need as IB's 'delete object on remove not working'
 }
 
 // Here as this is when screen detailed view needs update
@@ -265,7 +249,7 @@
                 insertNewObjectForEntityForName:@"Tag"
                 inManagedObjectContext:managedObjectContext];
     
-    // Connect up to movie (should be screen)
+    // Connect up to screen
     Screen *screen = [self.screensArrayController valueForKeyPath:@"selection.self"];
     tag.screen = screen;
     tag.rectTopLeftX = [NSNumber numberWithFloat: 0.4f];
@@ -275,7 +259,6 @@
     
     // Add to the controller which will update the tags array via bindings and select (as select inserted objects is on)
     [self.tagsArrayController addObject: tag];
-    [self setupTagRects];
 }
 
 - (IBAction)removeTag:(id)sender {
@@ -285,20 +268,14 @@
     // Get tag out of ArrayController
     Tag *tag = [self.tagsArrayController valueForKeyPath:@"selection.self"];
     
-    // Remove from the arraycontroller and CoreData context (not automatic)
-    [self.tagsArrayController removeObject: tag]; //*** this (sometimes!?) calls tableViewSelectionDidChange which calls setSelectedTagIndex
-    [self.managedObjectContext deleteObject: tag];
-    
-    // Set up and selects default tag (can't unselect as selectiondidchange not called if reselect tag 0)
-    [self setupTagRects];
-    if ([[self.tagsArrayController arrangedObjects] count] == 0)
-        [self.screenImageView setSelectedTagIndex: [NSNumber numberWithInt: -1]];
+    // Remove from CoreData (automatically removes from controller arrays and from owning screen)
+    // Note, will also trigger tableViewSelectionDidChange if needed which calls setSelectedTagIndex
+    [self.managedObjectContext deleteObject: tag];  // Also need as IB's 'delete object on remove not working'
+
     [self.screenImageView setNeedsDisplay];
 }
 
 - (IBAction)addMObject:(id)sender {
-    if (![sender isMemberOfClass:[NSMenuItem class]]) //impossible!
-        return;
     NSMenuItem* menuItem = sender;
     
     MObject *mobject = [NSEntityDescription
@@ -319,7 +296,6 @@
                 inManagedObjectContext:managedObjectContext];
     
     [mobject addFilmsObject: [self selectedFilm]];// Seems no need to add to ArrayController, they synch themselves just fine
-    [[self selectedFilm] addMobjectsObject: mobject];
 }
 
 - (IBAction)addExistingMObjectToFilm:(id)sender
@@ -328,7 +304,6 @@
         return;
     MObject *mobject = [self.allMObjectsArrayController valueForKeyPath:@"selection.self"];
     [mobject addFilmsObject: [self selectedFilm]];// Seems no need to add to ArrayController, they synch themselves just fine
-    [[self selectedFilm] addMobjectsObject: mobject];
 }
 
 - (IBAction)addMOCharacterToMOActor:(id)sender {
@@ -339,7 +314,6 @@
     MOActor *moactor = [self.mobjectsArrayController valueForKeyPath:@"selection.self"];
     
     [moactor addCharactersObject:mocharacter];
-    [mocharacter addActorsObject:moactor];
 }
 - (IBAction)addMObjectToTag:(id)sender {
 
@@ -347,11 +321,10 @@
     MObject *mobject = [self.mobjectsArrayController valueForKeyPath:@"selection.self"];
     Tag *tag = [self.tagsArrayController valueForKeyPath:@"selection.self"];
     
-    [mobject addTagsObject:tag];
     [tag addMobjectsObject:mobject];
 }
 
-// Assumes imageScaling NSScaleProportionally
+// Note, assumes imageScaling NSScaleProportionally
 - (CGRect)frameForImage:(NSImage*)image inImageViewAspectFit:(NSImageView*)imageView
 {
     float imageRatio = image.size.width / image.size.height;
@@ -375,8 +348,8 @@
     }
 }
 
-// Set-up the tagRect array used by the screen ImageView
-- (void)setupTagRects
+// Sent from the ScreenImageView to tell controller prepare the tags array for drawing
+- (void)drawRect:(NSEvent *)theEvent
 {
     NSArray *tagsArray = [self.tagsArrayController arrangedObjects];
     NSMutableArray *array = [NSMutableArray arrayWithCapacity: [tagsArray count]];
@@ -386,8 +359,7 @@
         {
             // Scaled image
             CGRect r = [self frameForImage: [self screenImageView].image inImageViewAspectFit: [self screenImageView]];
-            CGRect tagRect = CGRectMake (
-                                         r.origin.x + [tag.rectTopLeftX floatValue] * r.size.width,
+            CGRect tagRect = CGRectMake (r.origin.x + [tag.rectTopLeftX floatValue] * r.size.width,
                                          r.origin.y + [tag.rectTopLeftY floatValue] * r.size.height,
                                          [tag.rectWidth floatValue] * r.size.width,
                                          [tag.rectHeight floatValue] * r.size.height);
@@ -400,7 +372,7 @@
         }
     }
     
-    self.screenImageView.tagRects = array;//***is this memory not leaking?
+    self.screenImageView.tagRects = array;// Assume the setter manages memory properly!
 }
 
 // Sent from the ScreenImageView to tell controller selected tag rect has changed
@@ -410,8 +382,7 @@
         return;
     
     // Get tag out of ArrayController
-    NSArray *tagsArray = [self.tagsArrayController arrangedObjects];
-    Tag *tag = [tagsArray objectAtIndex: self.tagsArrayController.selectionIndex];
+    Tag *tag = [self.tagsArrayController valueForKeyPath:@"selection.self"];
     
     // Get the rect out of the view
     NSInteger index = [self.screenImageView.selectedTagIndex integerValue];

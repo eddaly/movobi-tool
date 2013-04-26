@@ -25,11 +25,11 @@
 		647A6559172882470081E62C /* NSPanelCanBecomeKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 647A6558172882470081E62C /* NSPanelCanBecomeKey.m */; };
 		647A655C1729C24C0081E62C /* Film.m in Sources */ = {isa = PBXBuildFile; fileRef = 647A655B1729C24C0081E62C /* Film.m */; };
 		647A655F1729C2620081E62C /* MOActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 647A655E1729C2620081E62C /* MOActor.m */; };
-		647A65621729C26F0081E62C /* MObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 647A65611729C26F0081E62C /* MObject.m */; };
 		647A65651729C27F0081E62C /* MOCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 647A65641729C27E0081E62C /* MOCharacter.m */; };
 		647A65681729C28C0081E62C /* MOLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 647A65671729C28C0081E62C /* MOLocation.m */; };
 		647A656B1729C29D0081E62C /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 647A656A1729C29C0081E62C /* Screen.m */; };
 		647A656E1729C2AA0081E62C /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 647A656D1729C2AA0081E62C /* Tag.m */; };
+		647A6577172A9F570081E62C /* MObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 647A6576172A9F570081E62C /* MObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,8 +64,6 @@
 		647A655B1729C24C0081E62C /* Film.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Film.m; sourceTree = "<group>"; };
 		647A655D1729C2610081E62C /* MOActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOActor.h; sourceTree = "<group>"; };
 		647A655E1729C2620081E62C /* MOActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOActor.m; sourceTree = "<group>"; };
-		647A65601729C26F0081E62C /* MObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MObject.h; sourceTree = "<group>"; };
-		647A65611729C26F0081E62C /* MObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MObject.m; sourceTree = "<group>"; };
 		647A65631729C27D0081E62C /* MOCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOCharacter.h; sourceTree = "<group>"; };
 		647A65641729C27E0081E62C /* MOCharacter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOCharacter.m; sourceTree = "<group>"; };
 		647A65661729C28C0081E62C /* MOLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOLocation.h; sourceTree = "<group>"; };
@@ -74,6 +72,8 @@
 		647A656A1729C29C0081E62C /* Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screen.m; sourceTree = "<group>"; };
 		647A656C1729C2AA0081E62C /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
 		647A656D1729C2AA0081E62C /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
+		647A6575172A9F570081E62C /* MObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MObject.h; sourceTree = "<group>"; };
+		647A6576172A9F570081E62C /* MObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,20 +162,20 @@
 			isa = PBXGroup;
 			children = (
 				6463DD40171705C3005E224B /* Movobi.xcdatamodeld */,
-				647A656C1729C2AA0081E62C /* Tag.h */,
-				647A656D1729C2AA0081E62C /* Tag.m */,
+				647A655A1729C24C0081E62C /* Film.h */,
+				647A655B1729C24C0081E62C /* Film.m */,
 				647A65691729C29C0081E62C /* Screen.h */,
 				647A656A1729C29C0081E62C /* Screen.m */,
+				647A656C1729C2AA0081E62C /* Tag.h */,
+				647A656D1729C2AA0081E62C /* Tag.m */,
+				647A6575172A9F570081E62C /* MObject.h */,
+				647A6576172A9F570081E62C /* MObject.m */,
 				647A65661729C28C0081E62C /* MOLocation.h */,
 				647A65671729C28C0081E62C /* MOLocation.m */,
 				647A65631729C27D0081E62C /* MOCharacter.h */,
 				647A65641729C27E0081E62C /* MOCharacter.m */,
-				647A65601729C26F0081E62C /* MObject.h */,
-				647A65611729C26F0081E62C /* MObject.m */,
 				647A655D1729C2610081E62C /* MOActor.h */,
 				647A655E1729C2620081E62C /* MOActor.m */,
-				647A655A1729C24C0081E62C /* Film.h */,
-				647A655B1729C24C0081E62C /* Film.m */,
 				647A6545172715830081E62C /* MOProp.h */,
 				647A6546172715830081E62C /* MOProp.m */,
 			);
@@ -278,11 +278,11 @@
 				647A6559172882470081E62C /* NSPanelCanBecomeKey.m in Sources */,
 				647A655C1729C24C0081E62C /* Film.m in Sources */,
 				647A655F1729C2620081E62C /* MOActor.m in Sources */,
-				647A65621729C26F0081E62C /* MObject.m in Sources */,
 				647A65651729C27F0081E62C /* MOCharacter.m in Sources */,
 				647A65681729C28C0081E62C /* MOLocation.m in Sources */,
 				647A656B1729C29D0081E62C /* Screen.m in Sources */,
 				647A656E1729C2AA0081E62C /* Tag.m in Sources */,
+				647A6577172A9F570081E62C /* MObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

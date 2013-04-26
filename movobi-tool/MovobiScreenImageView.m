@@ -14,15 +14,17 @@
 @synthesize tagRects;
 @synthesize selectedTagIndex;
 @synthesize draggingSelectedTag;
+@synthesize scalingSelectedTag;
 @synthesize origSelectedTagRect;
-@synthesize action;
+@synthesize mouseUpAction;
+@synthesize drawRectAction;
 @synthesize target;
 
 - (void)awakeFromNib
 {
     // Initialization code here.
     selectedTagIndex = [NSNumber numberWithInt:-1]; //i.e. take to mean no selected tag
-    draggingSelectedTag = FALSE;
+    draggingSelectedTag = scalingSelectedTag = FALSE;
 }
 
 - (void)drawTagArea:(CGRect) rect  withHighlight: (BOOL) highlighted
@@ -51,6 +53,10 @@
     NSGraphicsContext* theContext = [NSGraphicsContext currentContext];
     [theContext saveGraphicsState];
     
+    // Unless dragging/scaling, tell controller I'm about to draw (so it can prepare tags)
+    if (!draggingSelectedTag && !scalingSelectedTag)
+        [NSApp sendAction:[self drawRectAction] to:[self target] from:self];
+    
     int i = 0;
     CGRect selectedRect;
     for (NSValue *rectObj in tagRects)
@@ -75,6 +81,8 @@
     
     origSelectedTagRect = [[tagRects objectAtIndex: [selectedTagIndex integerValue]] rectValue];
     draggingSelectedTag = NSPointInRect([self convertPoint:[theEvent locationInWindow] fromView:nil], origSelectedTagRect);
+    if (!draggingSelectedTag)
+        scalingSelectedTag = TRUE;
 }
 
 -(void)mouseDragged:(NSEvent *)theEvent
@@ -99,7 +107,7 @@
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-    draggingSelectedTag = FALSE;
+    draggingSelectedTag = scalingSelectedTag = FALSE;
     
     // CODE TO RESET BUT NEEDS TO BE CALLED SOME OTHER TIME OR NOT AT ALL
     /*{
@@ -108,19 +116,7 @@
         [self setNeedsDisplay];
     }*/
     // Send to controller to handle
-    [NSApp sendAction:[self action] to:[self target] from:self];
-}
-
-- (SEL)action {return action; }
-
-- (void)setAction:(SEL)newAction {
-    action = newAction;
-}
-
-- (id)target { return target; }
-
-- (void)setTarget:(id)newTarget {
-    target = newTarget;
+    [NSApp sendAction:[self mouseUpAction] to:[self target] from:self];
 }
 
 @end

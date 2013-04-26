@@ -13,8 +13,10 @@
 @property (nonatomic, strong) NSMutableArray *tagRects;
 @property (nonatomic, strong) NSNumber *selectedTagIndex;
 @property BOOL draggingSelectedTag;
+@property BOOL scalingSelectedTag;
 @property CGRect origSelectedTagRect;
-@property SEL action;
+@property SEL mouseUpAction;
+@property SEL drawRectAction;
 @property id target;
 
 
