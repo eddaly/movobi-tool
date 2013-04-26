@@ -30,6 +30,7 @@
 		647A656B1729C29D0081E62C /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 647A656A1729C29C0081E62C /* Screen.m */; };
 		647A656E1729C2AA0081E62C /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 647A656D1729C2AA0081E62C /* Tag.m */; };
 		647A6577172A9F570081E62C /* MObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 647A6576172A9F570081E62C /* MObject.m */; };
+		647A657F172ABB460081E62C /* MovobiTool.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 647A657E172ABB460081E62C /* MovobiTool.iconset */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		647A656D1729C2AA0081E62C /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		647A6575172A9F570081E62C /* MObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MObject.h; sourceTree = "<group>"; };
 		647A6576172A9F570081E62C /* MObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MObject.m; sourceTree = "<group>"; };
+		647A657E172ABB460081E62C /* MovobiTool.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = MovobiTool.iconset; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 		6463DD1817170036005E224B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				647A657E172ABB460081E62C /* MovobiTool.iconset */,
 				6463DD851718925C005E224B /* cr.png */,
 				6463DD1917170036005E224B /* movobi-tool-Info.plist */,
 				6463DD1A17170036005E224B /* InfoPlist.strings */,
@@ -203,9 +206,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6463DD0D17170036005E224B /* movobi-tool */ = {
+		6463DD0D17170036005E224B /* Movobi Tool */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6463DD2E17170036005E224B /* Build configuration list for PBXNativeTarget "movobi-tool" */;
+			buildConfigurationList = 6463DD2E17170036005E224B /* Build configuration list for PBXNativeTarget "Movobi Tool" */;
 			buildPhases = (
 				6463DD0A17170036005E224B /* Sources */,
 				6463DD0B17170036005E224B /* Frameworks */,
@@ -215,7 +218,7 @@
 			);
 			dependencies = (
 			);
-			name = "movobi-tool";
+			name = "Movobi Tool";
 			productName = "movobi-tool";
 			productReference = 6463DD0E17170036005E224B /* movobi-tool.app */;
 			productType = "com.apple.product-type.application";
@@ -242,7 +245,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6463DD0D17170036005E224B /* movobi-tool */,
+				6463DD0D17170036005E224B /* Movobi Tool */,
 			);
 		};
 /* End PBXProject section */
@@ -257,6 +260,7 @@
 				6463DD2817170036005E224B /* MainMenu.xib in Resources */,
 				6463DD50171726BA005E224B /* MovobiMasterViewController.xib in Resources */,
 				6463DD871718925C005E224B /* cr.png in Resources */,
+				647A657F172ABB460081E62C /* MovobiTool.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,7 +355,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -378,7 +382,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = "";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -419,7 +423,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6463DD2E17170036005E224B /* Build configuration list for PBXNativeTarget "movobi-tool" */ = {
+		6463DD2E17170036005E224B /* Build configuration list for PBXNativeTarget "Movobi Tool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6463DD2F17170036005E224B /* Debug */,

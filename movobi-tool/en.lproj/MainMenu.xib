@@ -1300,7 +1300,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{131, 159}, {798, 503}}</string>
 				<int key="NSWTFlags">611845120</int>
-				<string key="NSWindowTitle">movobi-tool</string>
+				<string key="NSWindowTitle">Movobi Tool</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
@@ -1311,6 +1311,7 @@
 					<string key="NSFrameSize">{798, 503}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
+					<reference key="NSNextKeyView"/>
 					<string key="NSReuseIdentifierKey">_NS:20</string>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
@@ -3202,11 +3203,13 @@
 					<string key="className">MovobiMasterViewController</string>
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="addMOCharacterToMOActorButton">NSButtonCell</string>
+						<string key="addMObjectToTagButton">NSButton</string>
 						<string key="allMObjectsArrayController">NSArrayController</string>
 						<string key="allMObjectsPanel">NSPanel</string>
 						<string key="allMObjectsTableView">NSTableView</string>
 						<string key="filmArrayController">NSArrayController</string>
+						<string key="filmMOCharacterArrayController">NSArrayController</string>
+						<string key="filmMOCharactersPanel">NSPanel</string>
 						<string key="filmsTableView">NSTableView</string>
 						<string key="moactorCharacterArrayController">NSArrayController</string>
 						<string key="moactorPanel">NSPanel</string>
@@ -3217,14 +3220,15 @@
 						<string key="molocationPanel">NSPanel</string>
 						<string key="mopropPanel">NSPanel</string>
 						<string key="screenImageView">MovobiScreenImageView</string>
+						<string key="screensArrayController">NSArrayController</string>
 						<string key="screensTableView">NSTableView</string>
 						<string key="tagsArrayController">NSArrayController</string>
 						<string key="tagsTableView">NSTableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="addMOCharacterToMOActorButton">
-							<string key="name">addMOCharacterToMOActorButton</string>
-							<string key="candidateClassName">NSButtonCell</string>
+						<object class="IBToOneOutletInfo" key="addMObjectToTagButton">
+							<string key="name">addMObjectToTagButton</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="allMObjectsArrayController">
 							<string key="name">allMObjectsArrayController</string>
@@ -3241,6 +3245,14 @@
 						<object class="IBToOneOutletInfo" key="filmArrayController">
 							<string key="name">filmArrayController</string>
 							<string key="candidateClassName">NSArrayController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="filmMOCharacterArrayController">
+							<string key="name">filmMOCharacterArrayController</string>
+							<string key="candidateClassName">NSArrayController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="filmMOCharactersPanel">
+							<string key="name">filmMOCharactersPanel</string>
+							<string key="candidateClassName">NSPanel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="filmsTableView">
 							<string key="name">filmsTableView</string>
@@ -3281,6 +3293,10 @@
 						<object class="IBToOneOutletInfo" key="screenImageView">
 							<string key="name">screenImageView</string>
 							<string key="candidateClassName">MovobiScreenImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="screensArrayController">
+							<string key="name">screensArrayController</string>
+							<string key="candidateClassName">NSArrayController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="screensTableView">
 							<string key="name">screensTableView</string>
