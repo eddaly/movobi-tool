@@ -16,7 +16,7 @@
     <entity name="MObject" representedClassName="MObject" isAbstract="YES" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="flags" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="MovobiImageTransformer" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="films" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Film" inverseName="mobjects" inverseEntity="Film" syncable="YES"/>
@@ -55,10 +55,10 @@
         <element name="Film" positionX="-200" positionY="-153" width="128" height="163"/>
         <element name="MOActor" positionX="-162" positionY="212" width="128" height="58"/>
         <element name="MObject" positionX="-153" positionY="23" width="128" height="148"/>
+        <element name="MOCharacter" positionX="-11" positionY="212" width="128" height="58"/>
         <element name="MOLocation" positionX="-162" positionY="279" width="128" height="73"/>
         <element name="MOProp" positionX="-11" positionY="279" width="128" height="43"/>
         <element name="Screen" positionX="-351" positionY="8" width="128" height="163"/>
         <element name="Tag" positionX="-335" positionY="171" width="128" height="178"/>
-        <element name="MOCharacter" positionX="-11" positionY="212" width="128" height="58"/>
     </elements>
 </model>

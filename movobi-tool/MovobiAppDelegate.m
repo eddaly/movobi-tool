@@ -33,11 +33,15 @@
     self.masterViewController.view.frame = ((NSView*)self.window.contentView).bounds;
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {
+    return YES;
+}
+
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "movobi.movobi_tool" in the user's Application Support directory.
 - (NSURL *)applicationFilesDirectory
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL *appSupportURL = [[fileManager URLsForDirectory:NSDocumentDirectory /*NSApplicationSupportDirectory*/ inDomains:NSUserDomainMask] lastObject];
     return [appSupportURL URLByAppendingPathComponent:@"movobi.movobi_tool"];
 }
 
@@ -137,7 +141,7 @@
 // Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.
 - (IBAction)saveAction:(id)sender
 {
-    NSError *error = nil;
+     NSError *error = nil;
     
     if (![[self managedObjectContext] commitEditing]) {
         NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
@@ -165,29 +169,35 @@
         return NSTerminateNow;
     }
     
-    NSError *error = nil;
-    if (![[self managedObjectContext] save:&error]) {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Save changes?" defaultButton:@"Yes" alternateButton:@"No" otherButton:nil informativeTextWithFormat:@"The CoreData database has unsaved changes.  If you select No your changes will be lost."];
+    
+    // If Yes to save
+    if ([alert runModal] == NSAlertDefaultReturn)
+    {
+        NSError *error = nil;
+        if (![[self managedObjectContext] save:&error]) {
 
-        // Customize this code block to include application-specific recovery steps.              
-        BOOL result = [sender presentError:error];
-        if (result) {
-            return NSTerminateCancel;
-        }
+            // Customize this code block to include application-specific recovery steps.              
+            BOOL result = [sender presentError:error];
+            if (result) {
+                return NSTerminateCancel;
+            }
 
-        NSString *question = NSLocalizedString(@"Could not save changes while quitting. Quit anyway?", @"Quit without saves error question message");
-        NSString *info = NSLocalizedString(@"Quitting now will lose any changes you have made since the last successful save", @"Quit without saves error question info");
-        NSString *quitButton = NSLocalizedString(@"Quit anyway", @"Quit anyway button title");
-        NSString *cancelButton = NSLocalizedString(@"Cancel", @"Cancel button title");
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText:question];
-        [alert setInformativeText:info];
-        [alert addButtonWithTitle:quitButton];
-        [alert addButtonWithTitle:cancelButton];
+            NSString *question = NSLocalizedString(@"Could not save changes while quitting. Quit anyway?", @"Quit without saves error question message");
+            NSString *info = NSLocalizedString(@"Quitting now will lose any changes you have made since the last successful save", @"Quit without saves error question info");
+            NSString *quitButton = NSLocalizedString(@"Quit anyway", @"Quit anyway button title");
+            NSString *cancelButton = NSLocalizedString(@"Cancel", @"Cancel button title");
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:question];
+            [alert setInformativeText:info];
+            [alert addButtonWithTitle:quitButton];
+            [alert addButtonWithTitle:cancelButton];
 
-        NSInteger answer = [alert runModal];
-        
-        if (answer == NSAlertAlternateReturn) {
-            return NSTerminateCancel;
+            NSInteger answer = [alert runModal];
+            
+            if (answer == NSAlertAlternateReturn) {
+                return NSTerminateCancel;
+            }
         }
     }
 

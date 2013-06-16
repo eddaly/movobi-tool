@@ -34,7 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6463DD0E17170036005E224B /* movobi-tool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "movobi-tool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6463DD0E17170036005E224B /* movobi-tool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "movobi-tool.app"; path = "Movobi Tool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6463DD1117170036005E224B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		6463DD1417170036005E224B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		6463DD1517170036005E224B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
